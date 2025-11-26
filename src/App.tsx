@@ -34,7 +34,7 @@ function App() {
         <ResultsSection />
         <ProcessSection />
         <TrustSection />
-        <FinalCloseSection onCTA={handleRequestEvaluation} />
+        <FinalCloseSection />
       </main>
 
       <Footer />
