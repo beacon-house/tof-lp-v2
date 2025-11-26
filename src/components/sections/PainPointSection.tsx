@@ -10,13 +10,13 @@ export const PainPointSection: React.FC = () => {
         <TextContainer>
 
 
-          <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-navy mb-10 md:mb-12 leading-tight font-medium">
+          <p className="font-serif text-xl md:text-2xl lg:text-3xl text-navy mb-6 md:mb-8 leading-tight font-medium">
             If this feels familiar, you're not alone:
           </p>
 
           {/* Mobile: Horizontal Scroll, Desktop: Vertical List */}
           <div className="w-full overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 md:mx-0 md:px-0 md:pb-0 scrollbar-hide md:overflow-visible">
-            <ul className="flex md:flex-col gap-4 md:gap-6 w-max md:w-full">
+            <ul className="flex md:flex-col gap-3 md:gap-4 w-max md:w-full">
               {[
                 'Many activities, no clear direction',
                 'Unsure what matters in Grades 8–12',
@@ -33,7 +33,7 @@ export const PainPointSection: React.FC = () => {
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-base md:text-lg lg:text-xl text-navy/80 leading-relaxed font-medium pt-1 whitespace-normal">
+                  <span className="text-sm md:text-base lg:text-lg text-navy/80 leading-relaxed font-medium pt-1 whitespace-normal">
                     {item}
                   </span>
                 </li>
@@ -41,17 +41,17 @@ export const PainPointSection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="space-y-3 md:space-y-4 p-6 md:p-8 bg-gradient-to-br from-sage to-cream rounded-2xl border border-gold/10 shadow-luxury">
-            <p className="text-xl md:text-2xl lg:text-3xl font-serif font-medium text-navy leading-snug">
+          <div className="space-y-2 md:space-y-3 p-4 md:p-6 bg-gradient-to-br from-sage to-cream rounded-2xl border border-gold/10 shadow-luxury">
+            <p className="text-lg md:text-xl lg:text-2xl font-serif font-medium text-navy leading-snug">
               This isn't a <span className="font-bold text-navy">marks</span> problem.
             </p>
-            <p className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-navy leading-snug">
+            <p className="text-lg md:text-xl lg:text-2xl font-serif font-bold text-navy leading-snug">
               This is a <span className="cursive-keyword">clarity</span> problem.
             </p>
           </div>
         </TextContainer>
 
-        <div className="relative lg:order-last order-first h-[350px] md:h-[450px] lg:h-[600px]">
+        <div className="relative lg:order-last order-first h-[300px] md:h-[400px] lg:h-[500px]">
           {/* Decorative background elements */}
           <div className="absolute -top-6 -right-6 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-navy/5 rounded-full blur-3xl"></div>

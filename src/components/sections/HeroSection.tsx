@@ -30,26 +30,26 @@ export const HeroSection: React.FC<{ onLearnMore: () => void }> = ({ onLearnMore
       <div className="absolute top-40 right-[15%] w-3 h-3 bg-gold/20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
       <div className="absolute bottom-32 left-[20%] w-2 h-2 bg-navy/20 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
 
-      <div className="relative z-10 max-w-content mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16">
+      <div className="relative z-10 max-w-content mx-auto px-6 md:px-8 lg:px-12 py-8 md:py-10">
         <div className="max-w-text mx-auto text-center">
           {/* Stat pill with animation */}
-          <div className="flex flex-col items-center justify-center gap-3 mb-6 md:mb-10 opacity-0 animate-fade-in-up">
+          <div className="flex flex-col items-center justify-center gap-2 mb-4 md:mb-6 opacity-0 animate-fade-in-up">
             <StatPill />
           </div>
 
           {/* Hero headline with staggered animation */}
-          <h1 className="text-[2.5rem] leading-[1.15] md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-navy mb-6 md:mb-8 opacity-0 animate-fade-in-up-delay tracking-tight">
+          <h1 className="text-[2.25rem] leading-[1.15] md:text-4xl lg:text-5xl font-serif font-bold text-navy mb-4 md:mb-5 opacity-0 animate-fade-in-up-delay tracking-tight">
             The Hardest Part of Admissions Is Knowing What Actually Matters.
           </h1>
 
           {/* Subheadline with emphasis on clarity */}
-          <p className="text-lg md:text-xl lg:text-2xl text-navy/70 mb-8 md:mb-10 leading-relaxed font-light opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-navy/70 mb-5 md:mb-6 leading-relaxed font-light opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
             For most students, the real challenge isn't marks —<br className="hidden sm:inline" />
             it's not having <span className="cursive-keyword">clarity</span> on the path.
           </p>
 
           {/* CTA Button with glow effect */}
-          <div className="opacity-0 animate-fade-in-up-delay-2 mb-8 md:mb-10">
+          <div className="opacity-0 animate-fade-in-up-delay-2 mb-5 md:mb-6">
             <Button
               onClick={onLearnMore}
               variant="primary"
@@ -60,7 +60,7 @@ export const HeroSection: React.FC<{ onLearnMore: () => void }> = ({ onLearnMore
           </div>
 
           {/* Trust badges with enhanced styling */}
-          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm md:text-base font-medium text-navy/80 opacity-0 animate-fade-in-up-delay-2">
+          <div className="mt-4 md:mt-5 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs md:text-sm font-medium text-navy/80 opacity-0 animate-fade-in-up-delay-2">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-gold rounded-full"></div>
               <span className="whitespace-nowrap">35+ top IB & IGCSE schools</span>
@@ -78,14 +78,14 @@ export const HeroSection: React.FC<{ onLearnMore: () => void }> = ({ onLearnMore
           </div>
 
           {/* Closing Line */}
-          <div className="mt-8 md:mt-10 opacity-0 animate-fade-in-up-delay-3">
-            <p className="text-xl md:text-2xl font-serif text-navy/90">
+          <div className="mt-5 md:mt-6 opacity-0 animate-fade-in-up-delay-3">
+            <p className="text-lg md:text-xl font-serif text-navy/90">
               Start with <span className="cursive-keyword">clarity</span>.
             </p>
           </div>
 
           {/* Scroll indicator */}
-          <div className="mt-8 md:mt-12 flex justify-center opacity-0 animate-fade-in-up-delay-2">
+          <div className="mt-4 md:mt-6 flex justify-center opacity-0 animate-fade-in-up-delay-2">
             <div className="animate-float">
               <svg
                 className="w-6 h-6 md:w-7 md:h-7 text-gold/60"
