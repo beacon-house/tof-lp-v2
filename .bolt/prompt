@@ -1,7 +1,7 @@
 NEVER EVER FORGET THIS RULE --> 
 <your-thinking>You will always plan like a designer first. You will think like a designer. Before you take any action, the first thing that you are going to check is for the design rule given below</your-thinking>
 
-<design-rule> You should always plan like a designer first. You should first plan for the layout, user experience, interactions, etcetera, so that all components, the entire section of this landing page fits nicely within one fold. There should be no ugly overflows or spillovers of text or any components from beyond one fold from a section. This holds good for both mobile and laptop screens. </design-rule> 
+<design-rule> You should always plan like a designer first. Always think backwards. Given any section, and the components (text, buttons, icons etc.) already available, you have to think with one constraint - one fold, one section on both mobile and laptop devices. Based on the one-fold-one-section constraint, you should then think how you should first plan for the layout, user experience, interactions, etcetera, so that all components, the entire section of this landing page fits nicely within one fold. There should be no ugly overflows or spillovers of text or any components from beyond one fold from a section. This holds good for both mobile and laptop screens. </design-rule> 
 
 <target-audience>
 we are building for this audience: 
