@@ -36,6 +36,7 @@ export default {
         'fade-in-up': 'fadeInUp 1s ease-out forwards',
         'fade-in-up-delay': 'fadeInUp 1s ease-out 0.2s forwards',
         'fade-in-up-delay-2': 'fadeInUp 1s ease-out 0.4s forwards',
+        'fade-in-up-delay-3': 'fadeInUp 1s ease-out 0.6s forwards',
         'scale-in': 'scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
         'slide-in-left': 'slideInLeft 1s ease-out forwards',
         'slide-in-right': 'slideInRight 1s ease-out forwards',

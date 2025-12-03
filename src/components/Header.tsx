@@ -1,20 +1,13 @@
 // Sticky header with minimal clean design
 import React, { useState, useEffect } from 'react'
 
-interface HeaderProps {
-  onCTAClick: () => void
-}
-
-export const Header: React.FC<HeaderProps> = ({ onCTAClick }) => {
+export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showCTA, setShowCTA] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
-      // Show CTA after scrolling past hero section (one viewport height)
-      setShowCTA(window.scrollY > window.innerHeight * 0.8)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -81,14 +74,6 @@ export const Header: React.FC<HeaderProps> = ({ onCTAClick }) => {
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
             </button>
-            {showCTA && (
-              <button
-                onClick={onCTAClick}
-                className="bg-gradient-to-r from-gold to-goldLight text-navy px-5 py-2 rounded-lg font-semibold text-sm hover:shadow-glow transition-all duration-300 hover:scale-105 animate-fade-in"
-              >
-                Request an Evaluation
-              </button>
-            )}
           </nav>
 
           <button
