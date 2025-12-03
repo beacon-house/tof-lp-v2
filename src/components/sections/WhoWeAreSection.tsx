@@ -45,34 +45,8 @@ const differentiators = [
 export const WhoWeAreSection: React.FC = () => {
   return (
     <Section id="about" className="relative py-14 md:py-16 flex items-center bg-cream">
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
-        <div className="relative h-[250px] md:h-[400px] lg:h-[500px] order-2 lg:order-1">
-          {/* Decorative elements */}
-          <div className="absolute -top-8 -left-8 w-40 h-40 bg-gold/10 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-navy/5 rounded-full blur-3xl"></div>
-
-          {/* Founder spotlight frame */}
-          <div className="relative h-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-navy/20 rounded-3xl transform rotate-3"></div>
-            <div className="relative h-full rounded-3xl overflow-hidden shadow-luxury group transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-              <img
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop"
-                alt="Collaborative education environment"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent"></div>
-
-              {/* Founder badge */}
-              <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 backdrop-blur-luxury rounded-2xl p-3 md:p-5 shadow-luxury">
-                <p className="text-sm md:text-base text-white font-bold mb-1">Founder-Led Guidance</p>
-                <p className="text-xs md:text-sm text-white/80">Every family receives personal attention</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <TextContainer className="order-1 lg:order-2">
+      <div className="w-full max-w-4xl mx-auto">
+        <TextContainer>
           <h2 className="font-serif text-lg md:text-2xl lg:text-3xl text-navy mb-4 md:mb-6 leading-tight font-bold">
             Through our partnership with <span className="font-bold text-navy bg-gold/10 px-2 py-0.5 rounded">InGenius Prep</span>, we bring:
           </h2>
