@@ -36,11 +36,10 @@ export const AuthoritySection: React.FC = () => {
           <div className="w-full mb-6 md:mb-8">
             <ul className="flex flex-col gap-3 md:gap-4 w-full">
               {[
-                { main: 'Real strengths', sub: 'not a long list of activities' },
-                { main: 'Authentic curiosity & initiative', sub: 'not checkbox achievements' },
-                { main: 'Depth', sub: 'not activity collecting' },
-                { main: 'Direction that connects interests to pathways', sub: 'not scattered interests' },
-                { main: 'A story that stays consistent across Grades 8–12', sub: 'not last-minute scrambling' }
+                { main: 'Real strengths', sub: 'not long activity lists' },
+                { main: 'Direction that connects interests', sub: 'not scattered interests' },
+                { main: 'Depth and initiative', sub: 'not checkbox achievements' },
+                { main: 'Consistent growth across Grades 8–12', sub: 'not last-minute scrambling' }
               ].map((item, index) => (
                 <li
                   key={index}
