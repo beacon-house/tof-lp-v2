@@ -3,24 +3,6 @@ import React from 'react'
 import { Section } from '../Section'
 
 export const ResultsSection: React.FC = () => {
-  const universities = [
-    { name: 'Harvard', file: 'harvard.png' },
-    { name: 'Yale', file: 'yale.png' },
-    { name: 'Stanford', file: 'stanford.png' },
-    { name: 'MIT', file: 'mit.png' },
-    { name: 'Princeton', file: 'princeton.png' },
-    { name: 'Columbia', file: 'columbia.png' },
-    { name: 'Oxford', file: 'oxford.png' },
-    { name: 'Cambridge', file: 'cambridge.png' },
-    { name: 'Imperial', file: 'imperial.png' },
-    { name: 'UC Berkeley', file: 'uc-berkeley.png' },
-    { name: 'Brown', file: 'brown.png' },
-    { name: 'Duke', file: 'duke.png' },
-    { name: 'UChicago', file: 'uchicago.png' },
-    { name: 'NYU', file: 'nyu.png' },
-    { name: 'UCLA', file: 'ucla.png' }
-  ]
-
   const comparisonData = [
     {
       university: 'Harvard',
@@ -141,42 +123,10 @@ export const ResultsSection: React.FC = () => {
       </div>
 
       {/* Cursive Closing Line */}
-      <div className="text-center mb-4 md:mb-5">
+      <div className="text-center">
         <p className="text-base md:text-2xl lg:text-3xl text-navy font-serif font-medium">
           <span className="cursive-keyword">Clarity</span> → Direction → Outcomes.
         </p>
-      </div>
-
-      {/* Universities Label - Before logos */}
-
-
-      {/* University Logos - Marquee at the bottom */}
-      <div className="overflow-hidden relative">
-        <div
-          className="flex space-x-3 md:space-x-4"
-          style={{
-            animation: 'marquee 60s linear infinite',
-            width: 'max-content'
-          }}
-        >
-          {[...universities, ...universities, ...universities].map((university, index) => (
-            <div
-              key={`${university.name}-${index}`}
-              className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-cream rounded-xl flex items-center justify-center p-2 transition-all duration-300 grayscale hover:grayscale-0 hover:shadow-sm border border-gold/5"
-            >
-              <img
-                src={`/uni-logos/${university.file}`}
-                alt={`${university.name} logo`}
-                className="w-full h-full object-contain"
-                loading="lazy"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.style.display = 'none'
-                }}
-              />
-            </div>
-          ))}
-        </div>
       </div>
     </Section>
   )
