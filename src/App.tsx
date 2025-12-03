@@ -10,7 +10,6 @@ import { WhoWeAreSection } from './components/sections/WhoWeAreSection'
 import { ResultsSection } from './components/sections/ResultsSection'
 import { ProcessSection } from './components/sections/ProcessSection'
 import { TrustSection } from './components/sections/TrustSection'
-import { FinalCloseSection } from './components/sections/FinalCloseSection'
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
         <ResultsSection />
         <ProcessSection />
         <TrustSection />
-        <FinalCloseSection />
       </main>
 
       <Footer />
