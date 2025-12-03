@@ -29,7 +29,7 @@ export const AuthoritySection: React.FC = () => {
 
 
           <p className="font-serif text-lg md:text-2xl lg:text-3xl text-navy mb-6 md:mb-8 leading-tight font-medium">
-            In today's admissions world, what matters is:
+            Admissions teams of top colleges look for
           </p>
 
           {/* Vertical list on all screen sizes */}
