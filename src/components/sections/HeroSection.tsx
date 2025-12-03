@@ -50,17 +50,12 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           {/* Subheadline with emphasis on clarity */}
-          <p className="text-sm md:text-lg lg:text-xl text-navy/70 mb-2 md:mb-3 leading-[1.65] md:leading-[1.7] font-light opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
-            For most families, the real challenge isn't marks. It's <span className="cursive-keyword">clarity</span>.
-          </p>
-
-          {/* Target audience text */}
-          <p className="text-xs md:text-sm text-navy/60 mb-5 md:mb-6 opacity-0 animate-fade-in-up-delay-2">
-            Designed for ambitious IB and IGCSE families across Grades 8–12.
+          <p className="text-sm md:text-lg lg:text-xl text-navy/70 mb-4 md:mb-5 leading-[1.65] md:leading-[1.7] font-light opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
+            For most families, the real challenge isn't marks.<br className="md:hidden" /> It's <span className="cursive-keyword">clarity</span>.
           </p>
 
           {/* Trust stat boxes */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10 opacity-0 animate-fade-in-up-delay-2 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5 md:mb-8 opacity-0 animate-fade-in-up-delay-2 max-w-4xl mx-auto">
             {/* Box 1 */}
             <div className="bg-white rounded-2xl p-3 md:p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
               <div className="flex justify-center mb-2">
@@ -114,6 +109,11 @@ export const HeroSection: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* Target audience text */}
+          <p className="text-xs md:text-sm text-navy/60 mb-5 md:mb-6 opacity-0 animate-fade-in-up-delay-2">
+            Designed for ambitious IB and IGCSE families across Grades 8–12.
+          </p>
 
           {/* CTA Button */}
           <div>
