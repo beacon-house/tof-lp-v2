@@ -18,11 +18,11 @@ export const PainPointSection: React.FC = () => {
           <div className="w-full mb-6 md:mb-8">
             <ul className="flex flex-col gap-3 md:gap-4 w-full">
               {[
-                'Many activities, no clear direction',
-                'Unsure what matters in Grades 8–12',
-                'Don\'t know when to do what (subjects/tests/majors)',
-                'Hardworking child, scattered interests',
-                'Conflicting advice everywhere'
+                'Unsure what your child\'s long-term path should be',
+                'Many activities, but not sure which ones matter',
+                'Unsure what\'s important across Grades 8–12',
+                'Confusion about when to focus on what',
+                'Conflicting advice from school, tutors and peers'
               ].map((item, index) => (
                 <li
                   key={index}
