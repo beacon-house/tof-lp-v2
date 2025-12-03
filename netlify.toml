@@ -1,0 +1,53 @@
+# Netlify configuration for Beacon House Landing Page
+# Ensures proper Tailwind CSS compilation with custom colors
+
+[build]
+  # Build command - ensures TypeScript compilation and Vite build
+  command = "npm run build"
+
+  # Publish directory - Vite outputs to dist by default
+  publish = "dist"
+
+  # Node.js version
+  [build.environment]
+    NODE_VERSION = "18"
+
+# Disable Netlify's asset optimization to prevent CSS mangling
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  bundle = false
+  minify = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# Add caching headers for static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirect rules (if needed in future)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
