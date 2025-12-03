@@ -49,7 +49,7 @@ export const BridgeSection: React.FC = () => {
 
 
           <h2 className="font-serif text-lg md:text-2xl lg:text-3xl text-navy mb-4 leading-tight font-bold">
-            Here's exactly how we guide you:
+            Here's how we help families build that clarity
           </h2>
 
           <div className="h-1 w-24 bg-gradient-to-r from-gold to-goldLight rounded-full mx-auto"></div>
