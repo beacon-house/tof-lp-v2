@@ -3,6 +3,7 @@ import { useState, useRef, lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { HeroSection } from './components/sections/HeroSection'
+import { FormSection } from './components/sections/FormSection'
 
 const PainPointSection = lazy(() => import('./components/sections/PainPointSection').then(m => ({ default: m.PainPointSection })))
 const AuthoritySection = lazy(() => import('./components/sections/AuthoritySection').then(m => ({ default: m.AuthoritySection })))
@@ -16,8 +17,10 @@ const TrustSection = lazy(() => import('./components/sections/TrustSection').the
 function App() {
   const [showFirstGroup, setShowFirstGroup] = useState(false)
   const [showSecondGroup, setShowSecondGroup] = useState(false)
+  const [showForm, setShowForm] = useState(false)
   const firstGroupRef = useRef<HTMLDivElement>(null)
   const secondGroupRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   const handleLearnMore = () => {
     setShowFirstGroup(true)
@@ -31,6 +34,17 @@ function App() {
     setTimeout(() => {
       secondGroupRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
+  }
+
+  const handleShowForm = () => {
+    setShowForm(true)
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
+
+  const handleCloseForm = () => {
+    setShowForm(false)
   }
 
   return (
@@ -57,8 +71,14 @@ function App() {
               <WhoWeAreSection />
               <ResultsSection />
               <ProcessSection />
-              <TrustSection />
+              <TrustSection onShowForm={handleShowForm} />
             </Suspense>
+          </div>
+        )}
+
+        {showForm && (
+          <div ref={formRef}>
+            <FormSection onClose={handleCloseForm} />
           </div>
         )}
       </main>
