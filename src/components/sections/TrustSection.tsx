@@ -3,13 +3,17 @@ import React from 'react'
 import { Section } from '../Section'
 import { Button } from '../Button'
 
-export const TrustSection: React.FC = () => {
+interface TrustSectionProps {
+  onShowForm: () => void
+}
+
+export const TrustSection: React.FC<TrustSectionProps> = ({ onShowForm }) => {
   const handleBookCall = () => {
-    window.open('https://calendly.com/beacon-house', '_blank')
+    onShowForm()
   }
 
   const handleRequestEvaluation = () => {
-    window.open('https://forms.gle/beacon-house-evaluation', '_blank')
+    onShowForm()
   }
 
   return (
