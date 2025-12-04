@@ -54,7 +54,7 @@ export const PainPointSection: React.FC = () => {
           </div>
         </TextContainer>
 
-        <div className="relative lg:order-last order-first h-[300px] md:h-[400px] lg:h-[500px]">
+        <div className="relative lg:order-last order-first h-[300px] md:h-[400px] lg:h-[500px] hidden lg:block">
           {/* Decorative background elements */}
           <div className="absolute -top-6 -right-6 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-navy/5 rounded-full blur-3xl"></div>

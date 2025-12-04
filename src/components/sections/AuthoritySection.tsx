@@ -7,7 +7,7 @@ export const AuthoritySection: React.FC = () => {
   return (
     <Section id="authority" className="relative min-h-screen flex items-center bg-white">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
-        <div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-2 lg:order-1">
+        <div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-2 lg:order-1 hidden lg:block">
           {/* Decorative elements */}
           <div className="absolute -top-8 -left-8 w-40 h-40 bg-navy/5 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
