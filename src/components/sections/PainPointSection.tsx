@@ -41,7 +41,7 @@ export const PainPointSection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="space-y-2 md:space-y-3 p-4 md:p-6 bg-gradient-to-br from-sage to-cream rounded-2xl border border-gold/10 shadow-luxury mt-6 md:mt-8">
+          <div className="space-y-2 md:space-y-3 p-4 md:p-6 bg-gradient-to-br from-gray50 to-white rounded-2xl border border-gold/10 shadow-luxury mt-6 md:mt-8">
             <p className="text-base md:text-xl lg:text-2xl font-serif font-medium text-navy leading-snug">
               This isn't a <span className="font-bold text-navy">marks</span> problem.
             </p>

@@ -5,7 +5,7 @@ import { TextContainer } from '../TextContainer'
 
 export const AuthoritySection: React.FC = () => {
   return (
-    <Section id="authority" className="relative min-h-screen flex items-center bg-cream">
+    <Section id="authority" className="relative min-h-screen flex items-center bg-white">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
         <div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-2 lg:order-1">
           {/* Decorative elements */}

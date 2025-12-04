@@ -12,10 +12,10 @@ export const HeroSection: React.FC = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-cream pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-white pt-20 overflow-hidden">
       {/* Animated background gradient rays */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-cream via-sage to-cream"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray50 to-white"></div>
         <div
           className="absolute inset-0 opacity-30"
           style={{
