@@ -50,7 +50,12 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
       formState.updateField('funnelStage', '07_page_2_view')
       await saveFormDataIncremental(
         formState.sessionId,
-        { pageCompleted: 2, funnelStage: '07_page_2_view' },
+        {
+          pageCompleted: 2,
+          funnelStage: '07_page_2_view',
+          isQualifiedLead: formState.isQualifiedLead,
+          leadCategory: formState.leadCategory
+        },
         '07_page_2_view'
       )
       setCurrentStep('page2b')
@@ -62,7 +67,12 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
     formState.updateField('funnelStage', '07_page_2_view')
     await saveFormDataIncremental(
       formState.sessionId,
-      { pageCompleted: 2, funnelStage: '07_page_2_view' },
+      {
+        pageCompleted: 2,
+        funnelStage: '07_page_2_view',
+        isQualifiedLead: formState.isQualifiedLead,
+        leadCategory: formState.leadCategory
+      },
       '07_page_2_view'
     )
     setCurrentStep('page2a')

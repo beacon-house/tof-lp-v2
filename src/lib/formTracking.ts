@@ -23,13 +23,22 @@ export async function saveFormDataIncremental(
   funnelStage: FunnelStage
 ): Promise<boolean> {
   try {
+    console.log('[formTracking] saveFormDataIncremental called')
+    console.log('[formTracking] sessionId:', sessionId)
+    console.log('[formTracking] funnelStage:', funnelStage)
+    console.log('[formTracking] formData:', formData)
+
     const dbData: Record<string, any> = {
       environment: import.meta.env.MODE,
       funnel_stage: funnelStage,
     }
 
     Object.entries(formData).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
+      if (value !== undefined && value !== null) {
+        if (value === '' && typeof value === 'string') {
+          return
+        }
+
         if (key === 'countryCode' || key === 'phoneNumber') {
           return
         }
@@ -60,10 +69,15 @@ export async function saveFormDataIncremental(
       dbData.triggered_events = [funnelStage]
     }
 
+    console.log('[formTracking] Final dbData to save:', dbData)
+    console.log('[formTracking] isQualifiedLead value:', dbData.is_qualified_lead)
+
     const { error } = await supabase.rpc('upsert_form_session', {
       p_session_id: sessionId,
       p_form_data: dbData
     })
+
+    console.log('[formTracking] RPC call result - error:', error)
 
     if (error) {
       console.error('RPC upsert failed, trying direct upsert:', error)

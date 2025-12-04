@@ -160,6 +160,9 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
 
       formState.updateField('funnelStage', '10_form_submit')
 
+      console.log('QualifiedLeadForm final save - isQualifiedLead:', formState.isQualifiedLead)
+      console.log('QualifiedLeadForm final save - leadCategory:', formState.leadCategory)
+
       await saveFormDataIncremental(
         formState.sessionId,
         {
@@ -168,6 +171,8 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
           selectedDate: formState.selectedDate,
           selectedSlot: formState.selectedSlot,
           funnelStage: '10_form_submit',
+          isQualifiedLead: formState.isQualifiedLead,
+          leadCategory: formState.leadCategory,
         },
         '10_form_submit'
       )

@@ -62,12 +62,17 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
 
       formState.updateField('funnelStage', '10_form_submit')
 
+      console.log('DisqualifiedLeadForm final save - isQualifiedLead:', formState.isQualifiedLead)
+      console.log('DisqualifiedLeadForm final save - leadCategory:', formState.leadCategory)
+
       await saveFormDataIncremental(
         formState.sessionId,
         {
           parentName: formState.parentName,
           email: formState.email,
           funnelStage: '10_form_submit',
+          isQualifiedLead: formState.isQualifiedLead,
+          leadCategory: formState.leadCategory,
         },
         '10_form_submit'
       )

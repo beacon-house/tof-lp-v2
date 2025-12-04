@@ -92,7 +92,7 @@ function App() {
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Header />
 
-      <main>
+      <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
 
         <div ref={firstTriggerRef} className="h-1" />
@@ -120,13 +120,13 @@ function App() {
             </Suspense>
           </div>
         )}
-
-        {showForm && (
-          <div ref={formRef}>
-            <FormSection onClose={handleCloseForm} />
-          </div>
-        )}
       </main>
+
+      {showForm && (
+        <div ref={formRef} className="w-full">
+          <FormSection onClose={handleCloseForm} />
+        </div>
+      )}
 
       <Footer />
     </div>
