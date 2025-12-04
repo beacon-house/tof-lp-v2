@@ -43,9 +43,14 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
         targetGeographies: formState.targetGeographies,
       }
 
+      console.log('Form submission started')
+      console.log('Form data:', formData)
+
       const result = page1Schema.safeParse(formData)
+      console.log('Validation result:', result.success ? 'SUCCESS' : 'FAILED')
 
       if (!result.success) {
+        console.log('Validation errors:', result.error.issues)
         const newErrors: Record<string, string> = {}
         result.error.issues.forEach((err: any) => {
           if (err.path[0]) {
@@ -54,6 +59,13 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
         })
         setErrors(newErrors)
         setIsSubmitting(false)
+
+        const firstErrorField = Object.keys(newErrors)[0]
+        const errorElement = document.getElementById(firstErrorField)
+        if (errorElement) {
+          errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          errorElement.focus()
+        }
         return
       }
 
@@ -67,7 +79,10 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
         gradeFormat: formState.gradeFormat,
       })
 
+      console.log('Lead category:', leadCategory)
+
       const isQualified = ['bch', 'lum-l1', 'lum-l2'].includes(leadCategory)
+      console.log('Is qualified lead:', isQualified)
 
       formState.updateMultipleFields({
         leadCategory,
@@ -76,7 +91,8 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
         funnelStage: '05_page1_complete',
       })
 
-      await saveFormDataIncremental(
+      console.log('Saving form data to database...')
+      const saveResult = await saveFormDataIncremental(
         formState.sessionId,
         {
           ...formData,
@@ -87,10 +103,14 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
         },
         '05_page1_complete'
       )
+      console.log('Database save result:', saveResult)
 
+      console.log('Calling onComplete callback...')
       onComplete()
+      console.log('Form submission complete!')
     } catch (error) {
       console.error('Form submission error:', error)
+      console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
       setErrors({ submit: 'An error occurred. Please try again.' })
     } finally {
       setIsSubmitting(false)

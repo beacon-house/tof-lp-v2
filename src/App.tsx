@@ -1,5 +1,5 @@
 // Main App component integrating all sections with progressive reveal functionality
-import { useState, useRef, lazy, Suspense } from 'react'
+import { useState, useRef, lazy, Suspense, useEffect } from 'react'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { HeroSection } from './components/sections/HeroSection'
@@ -21,6 +21,8 @@ function App() {
   const firstGroupRef = useRef<HTMLDivElement>(null)
   const secondGroupRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
+  const firstTriggerRef = useRef<HTMLDivElement>(null)
+  const secondTriggerRef = useRef<HTMLDivElement>(null)
 
   const handleLearnMore = () => {
     setShowFirstGroup(true)
@@ -47,12 +49,53 @@ function App() {
     setShowForm(false)
   }
 
+  useEffect(() => {
+    const firstObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !showFirstGroup) {
+            setShowFirstGroup(true)
+            firstObserver.disconnect()
+          }
+        })
+      },
+      { threshold: 0, rootMargin: '100px' }
+    )
+
+    const secondObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !showSecondGroup) {
+            setShowSecondGroup(true)
+            secondObserver.disconnect()
+          }
+        })
+      },
+      { threshold: 0, rootMargin: '100px' }
+    )
+
+    if (firstTriggerRef.current) {
+      firstObserver.observe(firstTriggerRef.current)
+    }
+
+    if (secondTriggerRef.current && showFirstGroup) {
+      secondObserver.observe(secondTriggerRef.current)
+    }
+
+    return () => {
+      firstObserver.disconnect()
+      secondObserver.disconnect()
+    }
+  }, [showFirstGroup, showSecondGroup])
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Header />
 
       <main>
         <HeroSection onLearnMore={handleLearnMore} />
+
+        <div ref={firstTriggerRef} className="h-1" />
 
         {showFirstGroup && (
           <div ref={firstGroupRef}>
@@ -63,6 +106,8 @@ function App() {
             </Suspense>
           </div>
         )}
+
+        <div ref={secondTriggerRef} className="h-1" />
 
         {showSecondGroup && (
           <div ref={secondGroupRef}>
