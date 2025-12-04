@@ -64,6 +64,7 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
 
       console.log('DisqualifiedLeadForm final save - isQualifiedLead:', formState.isQualifiedLead)
       console.log('DisqualifiedLeadForm final save - leadCategory:', formState.leadCategory)
+      console.log('DisqualifiedLeadForm final save - pageCompleted:', formState.pageCompleted)
 
       await saveFormDataIncremental(
         formState.sessionId,
@@ -73,6 +74,7 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
           funnelStage: '10_form_submit',
           isQualifiedLead: formState.isQualifiedLead,
           leadCategory: formState.leadCategory,
+          pageCompleted: formState.pageCompleted,
         },
         '10_form_submit'
       )
@@ -141,6 +143,7 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
           variant="primary"
           onClick={() => {}}
           className="px-12"
+          disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Submit'}
         </Button>

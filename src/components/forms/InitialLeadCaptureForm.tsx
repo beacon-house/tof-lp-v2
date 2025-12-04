@@ -420,6 +420,7 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
           variant="primary"
           onClick={() => {}}
           className="px-12"
+          disabled={isSubmitting}
         >
           {isSubmitting ? 'Processing...' : 'Next'}
         </Button>

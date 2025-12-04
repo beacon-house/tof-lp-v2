@@ -162,6 +162,8 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
 
       console.log('QualifiedLeadForm final save - isQualifiedLead:', formState.isQualifiedLead)
       console.log('QualifiedLeadForm final save - leadCategory:', formState.leadCategory)
+      console.log('QualifiedLeadForm final save - isCounsellingBooked:', formState.isCounsellingBooked)
+      console.log('QualifiedLeadForm final save - pageCompleted:', formState.pageCompleted)
 
       await saveFormDataIncremental(
         formState.sessionId,
@@ -173,6 +175,8 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
           funnelStage: '10_form_submit',
           isQualifiedLead: formState.isQualifiedLead,
           leadCategory: formState.leadCategory,
+          isCounsellingBooked: formState.isCounsellingBooked,
+          pageCompleted: formState.pageCompleted,
         },
         '10_form_submit'
       )
@@ -326,6 +330,7 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
           variant="primary"
           onClick={() => {}}
           className="px-12"
+          disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Confirm Booking'}
         </Button>
