@@ -95,10 +95,10 @@ export const ResultsSection: React.FC = () => {
               <div className="text-gold mb-3 md:mb-4">
                 {stat.icon}
               </div>
-              <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-2">
+              <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-2">
                 {stat.number}
               </div>
-              <p className="text-xs md:text-sm text-navy/70 leading-snug font-medium">
+              <p className="text-sm md:text-base text-navy/70 leading-snug font-medium">
                 {stat.description}
               </p>
             </div>
