@@ -5,9 +5,9 @@ import { TextContainer } from '../TextContainer'
 
 export const AuthoritySection: React.FC = () => {
   return (
-    <Section id="authority" className="relative min-h-screen flex items-center bg-white">
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
-        <div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-2 lg:order-1 hidden lg:block">
+    <Section id="authority" className="relative md:min-h-screen flex items-center bg-white">
+      <div className="grid lg:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center w-full">
+        <div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-2 lg:order-1 hidden md:block">
           {/* Decorative elements */}
           <div className="absolute -top-8 -left-8 w-40 h-40 bg-navy/5 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
@@ -33,7 +33,7 @@ export const AuthoritySection: React.FC = () => {
           </p>
 
           {/* Vertical list on all screen sizes */}
-          <div className="w-full mb-6 md:mb-8">
+          <div className="w-full mb-4 md:mb-8">
             <ul className="flex flex-col gap-3 md:gap-4 w-full">
               {[
                 { main: 'Real strengths', sub: 'not long activity lists' },
@@ -65,7 +65,7 @@ export const AuthoritySection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="p-4 md:p-6 bg-gradient-to-br from-navy to-navyLight rounded-2xl shadow-luxury mt-6 md:mt-8">
+          <div className="p-4 md:p-6 bg-gradient-to-br from-navy to-navyLight rounded-2xl shadow-luxury mt-4 md:mt-8">
             <p className="text-base md:text-xl lg:text-2xl font-serif font-bold text-white leading-snug space-y-1 md:space-y-0">
               <span className="block md:inline">
                 <span className="cursive-keyword">Clarity</span> is not a good-to-have.
