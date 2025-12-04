@@ -66,16 +66,6 @@ export const PainPointSection: React.FC = () => {
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-navy/20 via-transparent to-transparent"></div>
-
-            {/* Floating badge */}
-            <div className="absolute bottom-6 left-6 right-6 backdrop-blur-luxury rounded-2xl p-4 md:p-5 shadow-luxury">
-              <p className="text-sm md:text-base text-navy/90 font-medium leading-relaxed">
-                "We had no idea where to even start with the admissions process."
-              </p>
-              <p className="text-xs md:text-sm text-navy/60 mt-2 font-medium">
-                — Parent, Grade 9 IB Student
-              </p>
-            </div>
           </div>
         </div>
       </div>
