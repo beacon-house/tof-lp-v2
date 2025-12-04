@@ -3,14 +3,11 @@ import React from 'react'
 import { StatPill } from '../StatPill'
 import { Button } from '../Button'
 
-export const HeroSection: React.FC = () => {
-  const scrollToNextSection = () => {
-    const nextSection = document.querySelector('section:nth-of-type(2)')
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+interface HeroSectionProps {
+  onLearnMore?: () => void
+}
 
+export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white pt-20 overflow-hidden">
       {/* Animated background gradient rays */}
@@ -117,7 +114,7 @@ export const HeroSection: React.FC = () => {
 
           {/* CTA Button */}
           <div>
-            <Button onClick={scrollToNextSection}>
+            <Button onClick={onLearnMore}>
               Learn More
             </Button>
           </div>
