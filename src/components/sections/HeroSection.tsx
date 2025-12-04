@@ -12,21 +12,21 @@ export const HeroSection: React.FC = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-cream pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-white pt-20 overflow-hidden">
       {/* Animated background gradient rays */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-cream via-sage to-cream"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray50 to-white"></div>
         <div
           className="absolute inset-0 opacity-30"
           style={{
-            background: 'radial-gradient(ellipse 1200px 800px at 50% 30%, rgba(245, 158, 11, 0.15) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse 1200px 800px at 50% 30%, rgba(255, 199, 54, 0.15) 0%, transparent 50%)',
           }}
         ></div>
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, #001F3F 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #003366 1px, transparent 0)',
             backgroundSize: '40px 40px',
           }}
         ></div>

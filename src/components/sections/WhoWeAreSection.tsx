@@ -44,7 +44,7 @@ const differentiators = [
 
 export const WhoWeAreSection: React.FC = () => {
   return (
-    <Section id="about" className="relative py-14 md:py-16 flex items-center bg-cream">
+    <Section id="about" className="relative py-14 md:py-16 flex items-center bg-white">
       <div className="w-full max-w-4xl mx-auto">
         <TextContainer>
           <h2 className="font-serif text-lg md:text-2xl lg:text-3xl text-navy mb-4 md:mb-6 leading-tight font-bold">
@@ -75,7 +75,7 @@ export const WhoWeAreSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-4 md:p-6 bg-gradient-to-br from-sage to-white rounded-2xl border border-gold/10 shadow-sm">
+          <div className="p-4 md:p-6 bg-gradient-to-br from-gray50 to-white rounded-2xl border border-gold/10 shadow-sm">
             <p className="font-serif text-base md:text-xl lg:text-2xl text-navy leading-snug font-medium">
               Every student's path is different — <span className="cursive-keyword">so the support must be too</span>.
             </p>

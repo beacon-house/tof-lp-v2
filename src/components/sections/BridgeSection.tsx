@@ -60,7 +60,7 @@ export const BridgeSection: React.FC = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="group p-3 md:p-5 bg-gradient-to-br from-cream to-sage rounded-2xl border border-gold/10 shadow-sm hover:shadow-luxury transition-all duration-300 hover:-translate-y-1 md:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] flex flex-col"
+              className="group p-3 md:p-5 bg-gradient-to-br from-white to-gray50 rounded-2xl border border-gold/10 shadow-sm hover:shadow-luxury transition-all duration-300 hover:-translate-y-1 md:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-xl md:text-3xl mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300">

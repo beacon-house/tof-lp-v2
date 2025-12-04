@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-luxury transition-all duration-300 ${
-        isScrolled ? 'shadow-luxury border-b border-gold/10' : 'bg-cream/80'
+        isScrolled ? 'shadow-luxury border-b border-gold/10' : 'bg-white/80'
       }`}
     >
       <div className="max-w-content mx-auto px-6 md:px-8 lg:px-12">
@@ -101,7 +101,7 @@ export const Header: React.FC = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-16 bg-cream backdrop-blur-2xl bg-opacity-95 z-40 animate-fade-in">
+        <div className="md:hidden fixed inset-0 top-16 bg-white backdrop-blur-2xl bg-opacity-95 z-40 animate-fade-in">
           <nav className="px-6 py-8 space-y-4 h-full">
             <button
               onClick={() => scrollToSection('pain-point')}

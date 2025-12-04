@@ -13,7 +13,7 @@ export const TrustSection: React.FC = () => {
   }
 
   return (
-    <Section id="trust" className="relative py-16 md:py-20 flex items-center bg-gradient-to-br from-white via-sage to-cream">
+    <Section id="trust" className="relative py-16 md:py-20 flex items-center bg-gradient-to-br from-white via-gray50 to-white">
       <div className="max-w-5xl mx-auto w-full">
         {/* Three Opening Lines */}
         <div className="text-center mb-8 md:mb-10 space-y-4 md:space-y-5">
