@@ -2,6 +2,10 @@
 import React from 'react'
 import { Section } from '../Section'
 
+interface BridgeSectionProps {
+  onUnderstandApproach?: () => void
+}
+
 const benefits = [
   {
     title: 'What actually matters vs what\'s noise',
@@ -40,7 +44,7 @@ const benefits = [
   }
 ]
 
-export const BridgeSection: React.FC = () => {
+export const BridgeSection: React.FC<BridgeSectionProps> = ({ onUnderstandApproach }) => {
   return (
     <Section id="bridge" className="relative py-10 md:py-12 flex items-center bg-white">
       <div className="w-full">
@@ -69,7 +73,7 @@ export const BridgeSection: React.FC = () => {
               <h3 className="text-xs md:text-base font-bold text-navy mb-1 md:mb-2 leading-snug">
                 {benefit.title}
               </h3>
-              <p className="text-[10px] md:text-sm text-navy/70 leading-relaxed mt-auto">
+              <p className="text-[10px] md:text-sm text-navy/70 leading-relaxed md:mt-auto">
                 {benefit.description}
               </p>
             </div>
@@ -78,16 +82,12 @@ export const BridgeSection: React.FC = () => {
 
         {/* CTA Button */}
         <div className="text-center">
-          <a
-            href="#achievements"
+          <button
             className="inline-block h-12 md:h-14 px-8 md:px-10 rounded-lg font-semibold text-base md:text-lg bg-gradient-to-r from-gold to-goldLight text-navy shadow-sm hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300 ease-in-out leading-[3rem] md:leading-[3.5rem]"
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' })
-            }}
+            onClick={onUnderstandApproach}
           >
             Understand Our Approach
-          </a>
+          </button>
         </div>
       </div>
     </Section>

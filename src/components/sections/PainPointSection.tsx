@@ -5,8 +5,8 @@ import { TextContainer } from '../TextContainer'
 
 export const PainPointSection: React.FC = () => {
   return (
-    <Section id="pain-point" className="relative min-h-screen flex items-center bg-white">
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
+    <Section id="pain-point" className="relative md:min-h-screen flex items-center bg-white">
+      <div className="grid lg:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center w-full">
         <TextContainer>
 
 
@@ -15,7 +15,7 @@ export const PainPointSection: React.FC = () => {
           </p>
 
           {/* Vertical list on all screen sizes */}
-          <div className="w-full mb-6 md:mb-8">
+          <div className="w-full mb-4 md:mb-8">
             <ul className="flex flex-col gap-3 md:gap-4 w-full">
               {[
                 'Unsure what your child\'s long-term path should be',
@@ -41,17 +41,20 @@ export const PainPointSection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="space-y-2 md:space-y-3 p-4 md:p-6 bg-gradient-to-br from-gray50 to-white rounded-2xl border border-gold/10 shadow-luxury mt-6 md:mt-8">
-            <p className="text-base md:text-xl lg:text-2xl font-serif font-medium text-navy leading-snug">
-              This isn't a <span className="font-bold text-navy">marks</span> problem.
-            </p>
-            <p className="text-base md:text-xl lg:text-2xl font-serif font-bold text-navy leading-snug">
-              This is a <span className="cursive-keyword">clarity</span> problem.
+          <div className="p-4 md:p-6 bg-gradient-to-br from-gray50 to-white rounded-2xl border border-gold/10 shadow-luxury mt-4 md:mt-8">
+            <p className="text-base md:text-xl lg:text-2xl font-serif text-navy leading-snug space-y-2 md:space-y-0">
+              <span className="block md:inline font-medium">
+                This isn't a <span className="font-bold text-navy">marks</span> problem.
+              </span>
+              <br className="md:hidden" />
+              <span className="block md:inline font-bold">
+                This is a <span className="cursive-keyword">clarity</span> problem.
+              </span>
             </p>
           </div>
         </TextContainer>
 
-        <div className="relative lg:order-last order-first h-[300px] md:h-[400px] lg:h-[500px]">
+        <div className="relative lg:order-last order-first h-[300px] md:h-[400px] lg:h-[500px] hidden md:block">
           {/* Decorative background elements */}
           <div className="absolute -top-6 -right-6 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-navy/5 rounded-full blur-3xl"></div>

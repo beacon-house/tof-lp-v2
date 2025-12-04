@@ -1,7 +1,6 @@
 // Section G - How We Work section with 5-step timeline process
 import React from 'react'
 import { Section } from '../Section'
-import { Button } from '../Button'
 
 interface ProcessStep {
   number: string
@@ -98,13 +97,6 @@ export const ProcessSection: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center mt-10 md:mt-12">
-          <Button variant="primary" className="w-full max-w-sm md:w-auto">
-            See How This Works
-          </Button>
         </div>
       </div>
     </Section>

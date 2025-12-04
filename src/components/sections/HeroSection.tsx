@@ -3,14 +3,11 @@ import React from 'react'
 import { StatPill } from '../StatPill'
 import { Button } from '../Button'
 
-export const HeroSection: React.FC = () => {
-  const scrollToNextSection = () => {
-    const nextSection = document.querySelector('section:nth-of-type(2)')
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+interface HeroSectionProps {
+  onLearnMore?: () => void
+}
 
+export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white pt-20 overflow-hidden">
       {/* Animated background gradient rays */}
@@ -50,8 +47,8 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           {/* Subheadline with emphasis on clarity */}
-          <p className="text-sm md:text-lg lg:text-xl text-navy/70 mb-4 md:mb-5 leading-[1.65] md:leading-[1.7] font-light opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
-            For most families, the real challenge isn't marks.<br className="md:hidden" /> It's <span className="cursive-keyword">clarity</span>.
+          <p className="text-base md:text-lg lg:text-xl text-navy/70 mb-4 md:mb-5 leading-[1.65] md:leading-[1.7] font-normal opacity-0 animate-fade-in-up-delay-2 max-w-2xl mx-auto">
+            For most families, the real challenge<br className="md:hidden" /> isn't marks. It's <span className="cursive-keyword">clarity</span>.
           </p>
 
           {/* Trust stat boxes */}
@@ -112,12 +109,12 @@ export const HeroSection: React.FC = () => {
 
           {/* Target audience text */}
           <p className="text-xs md:text-sm text-navy/60 mb-5 md:mb-6 opacity-0 animate-fade-in-up-delay-2">
-            Designed for ambitious IB and IGCSE families across Grades 8–12.
+            Designed for ambitious IB and IGCSE families<br className="md:hidden" /> across Grades 8–12.
           </p>
 
           {/* CTA Button */}
           <div>
-            <Button onClick={scrollToNextSection}>
+            <Button onClick={onLearnMore}>
               Learn More
             </Button>
           </div>
