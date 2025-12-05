@@ -230,10 +230,20 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
   }
 
   const [isCounselorExpanded, setIsCounselorExpanded] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-6xl mx-auto">
-      <div className="bg-gradient-to-br from-navy/5 via-white to-navy/5 rounded-xl border border-navy/20 p-3 md:p-4 mb-4">
+    <form onSubmit={handleSubmit} className="w-full max-w-6xl mx-auto min-h-[600px]">
+      <div className="bg-gradient-to-br from-navy/5 via-white to-navy/5 rounded-xl border border-navy/20 p-3 md:p-4 mb-4 mt-20 lg:mt-0">
         <h2 className="text-lg md:text-xl font-bold text-navy text-center leading-tight">
           Congratulations! {formState.studentName} has strong potential for Ivy League universities and global top-tier programs
         </h2>
@@ -244,8 +254,8 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
 
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
         <div className="lg:w-[35%] lg:flex-shrink-0">
-          <div className={`bg-white rounded-xl border border-gray-200 transition-all ${isCounselorExpanded ? 'p-4' : 'p-2'} lg:p-4`}>
-            {isCounselorExpanded ? (
+          <div className={`bg-white rounded-xl border border-gray-200 transition-all ${isCounselorExpanded || !isMobile ? 'p-4' : 'p-2'}`}>
+            {isCounselorExpanded || !isMobile ? (
               <>
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden ring-2 ring-navy/20">
@@ -329,7 +339,7 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
             </div>
           ) : null}
 
-          {(!formState.selectedDate || isCounselorExpanded) && (
+          {(!isMobile || !formState.selectedDate || isCounselorExpanded) && (
             <div className="bg-white rounded-xl border border-gray-200 p-4">
               <div className="flex items-center gap-2 mb-3">
                 <svg className="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +361,9 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
                       type="button"
                       onClick={() => {
                         handleFieldChange('selectedDate', formattedDate)
-                        setIsCounselorExpanded(false)
+                        if (isMobile) {
+                          setIsCounselorExpanded(false)
+                        }
                       }}
                       className={`px-2 py-2 rounded-lg border transition-all text-center ${
                         formState.selectedDate === formattedDate
