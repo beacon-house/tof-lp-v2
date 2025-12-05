@@ -34,11 +34,33 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
     const { leadCategory, currentGrade, formFillerType } = formState
 
     if (currentGrade === '7_below') {
+      formState.updateField('funnelStage', '10_form_submit')
+      await saveFormDataIncremental(
+        formState.sessionId,
+        {
+          pageCompleted: 1,
+          funnelStage: '10_form_submit',
+          isQualifiedLead: false,
+          leadCategory: 'drop'
+        },
+        '10_form_submit'
+      )
       setCurrentStep('success')
       return
     }
 
     if (formFillerType === 'student') {
+      formState.updateField('funnelStage', '10_form_submit')
+      await saveFormDataIncremental(
+        formState.sessionId,
+        {
+          pageCompleted: 1,
+          funnelStage: '10_form_submit',
+          isQualifiedLead: false,
+          leadCategory: 'nurture'
+        },
+        '10_form_submit'
+      )
       setCurrentStep('success')
       return
     }

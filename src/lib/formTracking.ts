@@ -29,7 +29,7 @@ export async function saveFormDataIncremental(
     console.log('[formTracking] formData:', formData)
 
     const dbData: Record<string, any> = {
-      environment: import.meta.env.MODE,
+      environment: import.meta.env.VITE_ENVIRONMENT,
       funnel_stage: funnelStage,
     }
 
