@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { useFormStore } from '../../store/formStore'
 import { page2ASchema } from '../../lib/validation'
 import { saveFormDataIncremental } from '../../lib/formTracking'
 import { Button } from '../Button'
+import { trackPage2Submit, trackFormComplete } from '../../lib/metaEvents'
 
 interface QualifiedLeadFormProps {
   onComplete: () => void
@@ -14,21 +15,21 @@ const counselorData = {
     title: 'Managing Partner',
     image: '/vishy.png',
     linkedin: 'https://www.linkedin.com/in/viswanathan-r-8504182/',
-    bio: 'IIT-IIM alum with 20+ yrs in education',
+    bio: 'IIT-IIM alum with 20+ yrs in education - built Manipal schools, founded Magic Crate (acquired by BYJU\'S). Dedicated to helping your child thrive in tomorrow\'s world.',
   },
   'lum-l1': {
     name: 'Karthik Lakshman',
     title: 'Managing Partner',
     image: '/karthik.png',
     linkedin: 'https://www.linkedin.com/in/karthiklakshman/',
-    bio: 'Georgia Tech Masters graduate',
+    bio: 'Georgia Tech Masters graduate. Former McKinsey consultant and Byju\'s Test Prep division leader with international education expertise.',
   },
   'lum-l2': {
     name: 'Karthik Lakshman',
     title: 'Managing Partner',
     image: '/karthik.png',
     linkedin: 'https://www.linkedin.com/in/karthiklakshman/',
-    bio: 'Georgia Tech Masters graduate',
+    bio: 'Georgia Tech Masters graduate. Former McKinsey consultant and Byju\'s Test Prep division leader with international education expertise.',
   },
 }
 
@@ -40,6 +41,8 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
   const formState = useFormStore()
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showFullBio, setShowFullBio] = useState(false)
+  const parentDetailsTracked = useRef(false)
 
   const counselor = counselorData[formState.leadCategory as 'bch' | 'lum-l1' | 'lum-l2']
 
@@ -98,6 +101,25 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
     if (!selectedDate) return []
     return timeSlots.filter(slot => isSlotAvailable(slot, selectedDate))
   }, [formState.selectedDate, availableDates])
+
+  useEffect(() => {
+    const isParentDetailsComplete =
+      formState.parentName.trim().length >= 2 &&
+      formState.email.trim().length > 0 &&
+      formState.email.includes('@')
+
+    if (isParentDetailsComplete && !parentDetailsTracked.current) {
+      parentDetailsTracked.current = true
+      saveFormDataIncremental(
+        formState.sessionId,
+        {
+          parentName: formState.parentName,
+          email: formState.email,
+        },
+        '09_page_2_parent_details_filled'
+      )
+    }
+  }, [formState.parentName, formState.email, formState.sessionId])
 
   const handleFieldChange = (field: string, value: any) => {
     formState.updateField(field as any, value)
@@ -165,6 +187,23 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
       console.log('QualifiedLeadForm final save - isCounsellingBooked:', formState.isCounsellingBooked)
       console.log('QualifiedLeadForm final save - pageCompleted:', formState.pageCompleted)
 
+      console.log('🎯 Tracking Page 2 Submit Events...')
+      const page2SubmitEvents = trackPage2Submit(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      console.log('🎯 Tracking Form Complete Events...')
+      const formCompleteEvents = trackFormComplete(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      const allMetaEvents = [...page2SubmitEvents, ...formCompleteEvents]
+      formState.addTriggeredEvents(allMetaEvents)
+
       await saveFormDataIncremental(
         formState.sessionId,
         {
@@ -177,6 +216,7 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
           leadCategory: formState.leadCategory,
           isCounsellingBooked: formState.isCounsellingBooked,
           pageCompleted: formState.pageCompleted,
+          triggeredEvents: formState.triggeredEvents,
         },
         '10_form_submit'
       )
@@ -191,10 +231,25 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto space-y-8">
-      <div className="bg-white rounded-xl border-2 border-gray-200 p-6 space-y-4">
-        <div className="flex items-start gap-4">
-          <div className="w-20 h-20 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto space-y-6 md:space-y-8">
+      <div className="bg-gradient-to-br from-gold/10 via-gold/5 to-transparent rounded-xl border-2 border-gold/30 p-6 md:p-8 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-navy mb-3">
+          Great news about {formState.studentName}! 🎉
+        </h2>
+        <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+          <span className="font-semibold text-navy">{formState.studentName}</span> has strong potential for elite university admissions! Book a strategy session with our Managing Partner.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-xl border-2 border-gray-200 shadow-lg p-6 md:p-8 space-y-4">
+        <div className="text-center md:text-left mb-4">
+          <span className="inline-block px-3 py-1 bg-gold/20 text-gold font-semibold text-xs uppercase tracking-wide rounded-full">
+            Founder-Led Session
+          </span>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
+          <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden ring-4 ring-gold/20">
             <img
               src={counselor.image}
               alt={counselor.name}
@@ -204,15 +259,35 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
               }}
             />
           </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold text-navy">{counselor.name}</h3>
-            <p className="text-sm text-gray-600 mb-2">{counselor.title}</p>
-            <p className="text-sm text-gray-700 mb-2">{counselor.bio}</p>
+
+          <div className="flex-1 text-center md:text-left">
+            <h3 className="text-xl md:text-2xl font-bold text-navy mb-1">{counselor.name}</h3>
+            <p className="text-sm md:text-base text-gold font-semibold mb-3">{counselor.title}</p>
+
+            <div className="md:hidden">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {showFullBio ? counselor.bio : `${counselor.bio.substring(0, 80)}...`}
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowFullBio(!showFullBio)}
+                className="text-sm text-gold hover:text-gold/80 font-medium mt-2 transition-colors"
+              >
+                {showFullBio ? 'View Less ↑' : 'View More ↓'}
+              </button>
+            </div>
+
+            <div className="hidden md:block">
+              <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-3">
+                {counselor.bio}
+              </p>
+            </div>
+
             <a
               href={counselor.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gold hover:underline"
+              className="inline-flex items-center gap-1 text-sm text-gold hover:text-gold/80 font-medium transition-colors mt-2"
             >
               View LinkedIn Profile →
             </a>
@@ -324,16 +399,19 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
         </div>
       )}
 
-      <div className="flex justify-center pt-4">
+      <div className="flex flex-col items-center pt-4 space-y-3">
         <Button
           type="submit"
           variant="primary"
           onClick={() => {}}
-          className="px-12"
+          className="px-12 w-full sm:w-auto"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Submitting...' : 'Confirm Booking'}
+          {isSubmitting ? 'Submitting...' : 'Book Strategy Session'}
         </Button>
+        <p className="text-xs text-gray-500 text-center max-w-md">
+          This is a complimentary strategy session. You'll receive confirmation within 24 hours.
+        </p>
       </div>
     </form>
   )

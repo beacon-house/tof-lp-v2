@@ -194,11 +194,13 @@
 ```
 IF currentGrade === '7_below':
   → Set lead_category = 'drop'
+  → Save to database with funnel_stage = '10_form_submit', pageCompleted = 1
   → Submit form immediately (no Page 2)
   → Show success screen
 
 ELSE IF formFillerType === 'student':
   → Set lead_category = 'nurture'
+  → Save to database with funnel_stage = '10_form_submit', pageCompleted = 1
   → Submit form immediately (no Page 2)
   → Show success screen
 
@@ -213,6 +215,8 @@ ELSE IF lead_category IN ['nurture', 'masters']:
   → Navigate to Page 2B (Disqualified Lead Form)
   → Show category-specific messaging
 ```
+
+**Note:** Auto-submit cases (grade 7_below and student filler) skip Page 2 entirely but still reach the final submit stage (`10_form_submit`). They save with `pageCompleted: 1` since they never view Page 2.
 
 ---
 
@@ -551,6 +555,12 @@ is_qualified_lead = lead_category === 'bch' ||
 - `'09_page_2_parent_details_filled'` - After parent fields filled
 - `'10_form_submit'` - Final submission
 
+**Important:** ALL form completions end at `'10_form_submit'`, including:
+- Auto-submit cases (student filler with `pageCompleted: 1`, lead_category: 'nurture')
+- Auto-submit cases (grade 7_below with `pageCompleted: 1`, lead_category: 'drop')
+- Manual submit via Page 2A (qualified leads with `pageCompleted: 2`)
+- Manual submit via Page 2B (disqualified leads with `pageCompleted: 2`)
+
 **Updated via:** `saveFormDataIncremental()` function in formTracking.ts
 
 #### 4. is_counselling_booked
@@ -582,6 +592,8 @@ is_counselling_booked = selectedDate !== '' && selectedSlot !== ''
 - Example: `['01_form_start', '02_page1_student_info_filled', '05_page1_complete']`
 - Used to track user journey and prevent duplicate event firing
 
+**Note:** Currently, `triggered_events` contains funnel stage names (internal tracking). Meta Pixel ID is stored in the `VITE_META_PIXEL_ID` environment variable and Meta event integration will be configured separately.
+
 #### 7. session_id
 **File:** `src/store/formStore.ts`
 **Function:** `initializeSession()`
@@ -596,12 +608,17 @@ session_id = crypto.randomUUID()
 #### 8. environment
 **File:** `src/lib/formTracking.ts`
 **When:** Set on every database write
-**Values:** `'development'` | `'production'`
+**Values:** String value from environment variable (e.g., "stg", "prod")
 
 **Logic:**
 ```javascript
-environment = import.meta.env.MODE
+environment = import.meta.env.VITE_ENVIRONMENT
 ```
+
+**Configuration:**
+- Must be set in `.env` file (e.g., `VITE_ENVIRONMENT=stg`)
+- No fallback value - will fail if not configured
+- Forces proper environment configuration
 
 #### 9. UTM Parameters
 **File:** `src/lib/utm.ts`

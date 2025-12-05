@@ -4,6 +4,7 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { HeroSection } from './components/sections/HeroSection'
 import { FormSection } from './components/sections/FormSection'
+import { initializeMetaPixel, trackPageView } from './lib/metaEvents'
 
 const PainPointSection = lazy(() => import('./components/sections/PainPointSection').then(m => ({ default: m.PainPointSection })))
 const AuthoritySection = lazy(() => import('./components/sections/AuthoritySection').then(m => ({ default: m.AuthoritySection })))
@@ -48,6 +49,12 @@ function App() {
   const handleCloseForm = () => {
     setShowForm(false)
   }
+
+  useEffect(() => {
+    console.log('🎯 Initializing Meta Pixel and tracking page view...')
+    initializeMetaPixel()
+    trackPageView()
+  }, [])
 
   useEffect(() => {
     const firstObserver = new IntersectionObserver(

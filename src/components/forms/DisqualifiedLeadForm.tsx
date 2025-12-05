@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useFormStore } from '../../store/formStore'
 import { page2BSchema } from '../../lib/validation'
 import { saveFormDataIncremental } from '../../lib/formTracking'
 import { Button } from '../Button'
+import { trackPage2Submit, trackFormComplete } from '../../lib/metaEvents'
 
 interface DisqualifiedLeadFormProps {
   onComplete: () => void
@@ -12,6 +13,7 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
   const formState = useFormStore()
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const parentDetailsTracked = useRef(false)
 
   const getMessage = () => {
     if (formState.leadCategory === 'masters') {
@@ -27,6 +29,25 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
   }
 
   const message = getMessage()
+
+  useEffect(() => {
+    const isParentDetailsComplete =
+      formState.parentName.trim().length >= 2 &&
+      formState.email.trim().length > 0 &&
+      formState.email.includes('@')
+
+    if (isParentDetailsComplete && !parentDetailsTracked.current) {
+      parentDetailsTracked.current = true
+      saveFormDataIncremental(
+        formState.sessionId,
+        {
+          parentName: formState.parentName,
+          email: formState.email,
+        },
+        '09_page_2_parent_details_filled'
+      )
+    }
+  }, [formState.parentName, formState.email, formState.sessionId])
 
   const handleFieldChange = (field: string, value: any) => {
     formState.updateField(field as any, value)
@@ -66,6 +87,23 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
       console.log('DisqualifiedLeadForm final save - leadCategory:', formState.leadCategory)
       console.log('DisqualifiedLeadForm final save - pageCompleted:', formState.pageCompleted)
 
+      console.log('🎯 Tracking Page 2 Submit Events...')
+      const page2SubmitEvents = trackPage2Submit(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      console.log('🎯 Tracking Form Complete Events...')
+      const formCompleteEvents = trackFormComplete(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      const allMetaEvents = [...page2SubmitEvents, ...formCompleteEvents]
+      formState.addTriggeredEvents(allMetaEvents)
+
       await saveFormDataIncremental(
         formState.sessionId,
         {
@@ -75,6 +113,7 @@ export const DisqualifiedLeadForm: React.FC<DisqualifiedLeadFormProps> = ({ onCo
           isQualifiedLead: formState.isQualifiedLead,
           leadCategory: formState.leadCategory,
           pageCompleted: formState.pageCompleted,
+          triggeredEvents: formState.triggeredEvents,
         },
         '10_form_submit'
       )
