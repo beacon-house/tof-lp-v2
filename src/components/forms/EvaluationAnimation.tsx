@@ -43,8 +43,8 @@ export const EvaluationAnimation: React.FC<EvaluationAnimationProps> = ({ onComp
   }, [])
 
   return (
-    <div className="w-full max-w-2xl mx-auto py-12 px-6">
-      <div className="text-center space-y-8">
+    <div className="w-full max-w-2xl mx-auto py-12 px-6 min-h-[600px] md:min-h-[700px] flex items-center">
+      <div className="text-center space-y-8 w-full">
         <div className="space-y-3">
           <h3 className="text-2xl font-semibold text-navy">
             Evaluating Your Profile
