@@ -1,164 +1,219 @@
-# 
+# Beacon House — Landing Page Copy
 
-This is the **final version** you can use as the **single LP** for BOTH  
-TOF and MOF ads.
-
----
-
-# **📱 BEACON HOUSE — FINAL MOBILE-FIRST LANDING PAGE**
-
-*(Fully stitched TOF \+ MOF flow, ready to upload)*
+This document reflects the **final implemented copy** as deployed in the landing page code.
 
 ---
 
-# **⭐ SECTION A — HERO (Above the Fold)**
+# **📱 IMPLEMENTED LANDING PAGE SECTIONS**
 
-**Headline:**  
-The Hardest Part of Admissions Is Knowing What Actually Matters.
+---
 
-**Sub-headline:**  
-For most students, the real challenge isn’t marks —  
-it’s not having clarity on the path.
+## **SECTION A — HERO (Above the Fold)**
 
-**Microline:**  
-Founder-led guidance for ambitious IB \+ IGCSE families.
+**Main Headline:**
+The hardest part of admissions is knowing what **actually matters.**
 
-**Primary CTA:**  
+**Sub-headline:**
+For most families, the real challenge isn't marks. It's **clarity**.
+
+**Trust Statistics (4 boxes):**
+- 620+ Ivy League admits
+- 35+ IB & IGCSE schools
+- FAO-led guidance
+- Founder-led small cohorts
+
+**Target Audience Line:**
+Designed for ambitious IB and IGCSE families across Grades 8–12.
+
+**Primary CTA:**
 Learn More
 
-*(scroll cue ↓)*
+---
+
+## **SECTION B — THE REAL PAIN POINT (Clarity Problem)**
+
+**Intro Line:**
+If this feels familiar, you're not alone:
+
+**Pain Points (5 items):**
+- Unsure what your child's long-term path should be
+- Many activities, but not sure which ones matter
+- Unsure what's important across Grades 8–12
+- Confusion about when to focus on what
+- Conflicting advice from school, tutors and peers
+
+**Closing Statement:**
+This isn't a **marks** problem.
+This is a **clarity** problem.
 
 ---
 
-# **⭐ SECTION B — THE REAL PAIN POINT (Clarity Problem)**
+## **SECTION C — WHAT ACTUALLY MATTERS NOW (Authority)**
 
-If you’re a parent, this will feel familiar:
+**Headline:**
+Admissions teams of top colleges look for
 
-* Too many opinions  
-* No clear starting point  
-* No way to know what actually matters  
-* Constant pressure, zero clarity
+**Key Elements (4 items with contrasts):**
+- Real strengths — *not long activity lists*
+- Direction that connects interests — *not scattered interests*
+- Depth and initiative — *not checkbox achievements*
+- Consistent growth across Grades 8–12 — *not last-minute scrambling*
 
-This isn’t a **marks** problem.  
-This is a **direction** problem.
-
----
-
-# **⭐ SECTION C — WHAT ACTUALLY MATTERS NOW (Authority Without Pressure)**
-
-In today’s admissions world, what matters is:
-
-* real strengths  
-* curiosity and initiative  
-* depth over activity-collecting  
-* clarity of direction  
-* a story that makes sense
-
-**Admissions teams reward clarity.**
+**Closing Statement:**
+**Clarity** is not a good-to-have.
+It's a must-have.
 
 ---
 
-# **⭐ SECTION D — WHAT WE HELP FAMILIES DO (TOF → MOF bridge)**
+## **SECTION D — WHAT WE HELP FAMILIES DO (Bridge to MOF)**
 
-We help families understand:
+**Headline:**
+Here's how we help families build that clarity
 
-* what choices actually matter  
-* what to do in each grade (8–12)  
-* how admissions teams think  
-* what to ignore completely  
-* how to build direction calmly  
-* how strengths turn into opportunities
+**Benefits (7 items with icons and descriptions):**
+1. 🎯 **What actually matters vs what's noise** — So you stop guessing.
+2. 📅 **What to do in each grade (8–12)** — Know exactly what matters each year — with no confusion.
+3. 🧭 **How interests become real pathways** — From "they like many things" → "this direction makes sense."
+4. 🎓 **How admissions teams think at every stage** — So your child's choices align with what colleges actually value.
+5. ✨ **What to ignore completely** — So your child isn't pulled into unnecessary pressure.
+6. ⚖️ **How to build direction with busy schedules** — Sports, school load, multiple interests — balanced.
+7. 🚀 **How strengths turn into depth + impact** — The base of a strong college story.
 
-This is where clarity begins.
-
-**CTA (inline, soft):**  
+**CTA:**
 Understand Our Approach
 
 ---
 
-# **⭐ SECTION E — WHO WE ARE (MOF Entry Begins)**
+## **SECTION E — WHO WE ARE (MOF Entry)**
 
-A boutique, founder-led admissions company  
-in partnership with **InGenius Prep** —  
-one of the world’s largest teams of  
-**150+ Former Admissions Officers**.
+**Headline:**
+Through our partnership with **InGenius Prep**, we bring:
 
-We combine:
+**Key Differentiators (4 items):**
+- **Former Admissions Officers** — Experts who know how applications are evaluated
+- **Graduate Coaches from top global schools** — Mentors who help shape direction, depth, and narrative
+- **India-context guidance** — Teams who understand school realities & pressures
+- **World-class opportunities** — Research mentorship, signature projects, internships
 
-* global admissions expertise  
-* India-context intelligence  
-* small cohorts  
-* Graduate Coaches \+ FAOs  
-* deep founder oversight  
-* student-first clarity
-
-This is not mass counselling.  
-This is the opposite.
+**Closing Statement:**
+Every student's path is different — **so the support must be too**.
 
 ---
 
-# **⭐ SECTION F — RESULTS (Subtle, Premium, Non-Fear-Based)**
+## **SECTION F — RESULTS (Two-Part Section)**
 
-When clarity and effort come together,  
-**great outcomes follow naturally.**
+### **Part 1: Proven Results (Navy Background)**
 
-Our students have earned admits to leading universities:
+**Headline:**
+Proven Results
 
-Harvard • Yale • Brown • UPenn • Columbia • Duke  
-UC Berkeley • UCLA • UChicago • NYU • Georgia Tech  
-Imperial • Cambridge • NUS • NTU
+**Sub-headline:**
+When clarity and effort come together, great outcomes follow naturally.
 
-*(Clean, premium, no fear, no pressure.)*
+**Statistics (4 key metrics with icons):**
+- **150+** Former Ivy League Admissions Officers as Counsellors
+- **$4 Mn+** Scholarships Secured
+- **100%** Guaranteed Research & Internship Placements
+- **99%** Family Satisfaction Rate
 
----
+### **Part 2: Comparison Data (White Background)**
 
-# **⭐ SECTION G — HOW WE WORK (MOF Content, Aligned With Ads)**
+**Headline:**
+Your Odds Of Admission, **Multiplied By 5x**
 
-**Our Process**
+**Sub-headline:**
+Here's a comparison of the university selection rates of other students vs our students
 
-**1\. Discovery & Clarity**  
-Understand your child’s profile, strengths, interests and direction.
+**Comparison Data (4 universities):**
+- **Harvard:** Other Students 3/100 → Our Students 15/100 (4.3X Higher)
+- **Oxford:** Other Students 9/100 → Our Students 29/100 (3.2X Higher)
+- **Cambridge:** Other Students 11/100 → Our Students 36/100 (3.3X Higher)
+- **MIT:** Other Students 4/100 → Our Students 21/100 (5.4X Higher)
 
-**2\. Strategy & Planning**  
-FAOs and Graduate Coaches build a clear plan and admissions strategy.
-
-**3\. Profile Building & Direction**  
-Guided development of depth, initiative, curiosity, impact and narrative.
-
-**4\. Application Execution**  
-Essays, recommendations, interviews, portfolios —  
-all done with structure and clarity.
-
-**5\. Decisions & Guidance**  
-Support through the entire admissions cycle.
-
-CTA (inline):  
-See How This Works
+**Closing Line:**
+**Clarity** → **Direction** → **Outcomes**.
 
 ---
 
-# **⭐ SECTION H — TRUST \+ PROOF (Mobile-First, Scannable)**
+## **SECTION G — HOW WE WORK (Process)**
 
-• 150+ Former Admissions Officers  
-• Students from 35+ top IB & IGCSE schools  
-• Small cohorts, high involvement  
-• Founder-led relationship oversight  
-• Integrated FAO \+ GC delivery model  
-• Calm, structured, clarity-first guidance
+**Headline:**
+How We Work
+
+**5-Step Process:**
+
+**1. Discovery & Clarity**
+Strengths, interests, potential pathways
+
+**2. Strategy & Planning**
+A clear 8–12 multi-year plan + sequencing
+
+**3. Profile Building**
+Depth, initiative, impact, aligned to major
+
+**4. Applications**
+Essays, recos, interviews, portfolios — one coherent narrative
+
+**5. Guidance through decisions**
+Every choice covered
 
 ---
 
-# **⭐ SECTION I — FINAL CLOSE (BOF-Ready)**
+## **SECTION H — ACHIEVEMENTS (Navy Background)**
 
-Admissions doesn’t have to feel chaotic.  
-Clarity is possible.  
-And it changes everything.
+**Headline:**
+Beacon House exists to give families personalized, **clarity-first** guidance that traditional counseling models rarely offer
 
-**Primary CTA:**  
+**Key Achievements (4 statistics):**
+- **620+** Ivy League Acceptances
+- **100+** Admits to top 5 UK Universities
+- **$4Mn+** in Scholarships
+- **509** Top 30 Acceptances in 2024
+
+---
+
+## **SECTION I — TRUST & CLOSE (Final CTA)**
+
+**Three Opening Lines:**
+- Admissions doesn't have to feel chaotic.
+- Clarity is possible.
+- And it changes **everything**.
+
+**Primary CTA:**
 Book a Founder Strategy Call
 
-**Secondary CTA:**  
-Request Evaluation
+**Secondary CTA:**
+Request an Evaluation
 
 ---
 
+## **SECTION J — FINAL CLOSE**
+
+**Headline:**
+Let's start with **clarity**.
+
+**Sub-headline:**
+Your journey to confident, purposeful admissions begins here.
+
+---
+
+## **SEO METADATA**
+
+**Title Tag:**
+World's Top Universities Admissions Guidance | Beacon House
+
+**Meta Description:**
+Clarity in admissions to world's top universities. Founder-led guidance for IB & IGCSE families navigating the university admissions process with confidence.
+
+---
+
+## **DESIGN NOTES**
+
+- All sections optimized for one-fold-one-section constraint on both mobile and desktop
+- Primary keyword "Clarity" emphasized throughout with cursive styling
+- Color scheme: Navy (#003366), Gold (#FFC736), White
+- Mobile-first responsive design with breakpoints at md (768px) and lg (1024px)
+- Animations: fade-in-up with staggered delays for hero elements
+- CTAs use gradient gold buttons with hover effects
+
+---
