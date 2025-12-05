@@ -2,12 +2,20 @@
 import React from 'react'
 import { StatPill } from '../StatPill'
 import { Button } from '../Button'
+import { trackHeroCTA } from '../../lib/metaEvents'
 
 interface HeroSectionProps {
   onLearnMore?: () => void
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
+  const handleCTAClick = () => {
+    console.log('🎯 Tracking Hero CTA Click...')
+    trackHeroCTA()
+    if (onLearnMore) {
+      onLearnMore()
+    }
+  }
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white pt-20 overflow-hidden">
       {/* Animated background gradient rays */}
@@ -114,7 +122,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
 
           {/* CTA Button */}
           <div>
-            <Button onClick={onLearnMore}>
+            <Button onClick={handleCTAClick}>
               Learn More
             </Button>
           </div>

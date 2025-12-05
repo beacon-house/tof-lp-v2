@@ -5,6 +5,7 @@ import { EvaluationAnimation } from './EvaluationAnimation'
 import { QualifiedLeadForm } from './QualifiedLeadForm'
 import { DisqualifiedLeadForm } from './DisqualifiedLeadForm'
 import { saveFormDataIncremental } from '../../lib/formTracking'
+import { trackPage2View } from '../../lib/metaEvents'
 
 type FormStep = 'page1' | 'evaluation' | 'page2a' | 'page2b' | 'success'
 
@@ -69,6 +70,14 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
     if (leadCategory === 'bch' || leadCategory === 'lum-l1' || leadCategory === 'lum-l2') {
       setCurrentStep('evaluation')
     } else if (leadCategory === 'nurture' || leadCategory === 'masters') {
+      console.log('🎯 Tracking Page 2 View Events (nurture/masters)...')
+      const page2ViewEvents = trackPage2View(
+        freshState.leadCategory || undefined,
+        freshState.isQualifiedLead,
+        freshState.formFillerType as 'parent' | 'student'
+      )
+      formState.addTriggeredEvents(page2ViewEvents)
+
       formState.updateField('pageCompleted', 2)
       formState.updateField('funnelStage', '07_page_2_view')
       await saveFormDataIncremental(
@@ -77,7 +86,8 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
           pageCompleted: 2,
           funnelStage: '07_page_2_view',
           isQualifiedLead: freshState.isQualifiedLead,
-          leadCategory: freshState.leadCategory
+          leadCategory: freshState.leadCategory,
+          triggeredEvents: formState.triggeredEvents
         },
         '07_page_2_view'
       )
@@ -86,6 +96,14 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
   }
 
   const handleEvaluationComplete = async () => {
+    console.log('🎯 Tracking Page 2 View Events (qualified leads)...')
+    const page2ViewEvents = trackPage2View(
+      formState.leadCategory || undefined,
+      formState.isQualifiedLead,
+      formState.formFillerType as 'parent' | 'student'
+    )
+    formState.addTriggeredEvents(page2ViewEvents)
+
     formState.updateField('pageCompleted', 2)
     formState.updateField('funnelStage', '07_page_2_view')
     await saveFormDataIncremental(
@@ -94,7 +112,8 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
         pageCompleted: 2,
         funnelStage: '07_page_2_view',
         isQualifiedLead: formState.isQualifiedLead,
-        leadCategory: formState.leadCategory
+        leadCategory: formState.leadCategory,
+        triggeredEvents: formState.triggeredEvents
       },
       '07_page_2_view'
     )

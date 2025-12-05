@@ -27,7 +27,7 @@ export interface FormState {
   isCounsellingBooked: boolean
   funnelStage: FunnelStage
   pageCompleted: number
-  triggeredEvents: FunnelStage[]
+  triggeredEvents: string[]
   utmParams: UtmParams
 }
 
@@ -35,6 +35,7 @@ interface FormStore extends FormState {
   initializeSession: () => void
   updateField: <K extends keyof FormState>(field: K, value: FormState[K]) => void
   updateMultipleFields: (updates: Partial<FormState>) => void
+  addTriggeredEvents: (events: string[]) => void
   resetForm: () => void
 }
 
@@ -66,7 +67,7 @@ const initialState: FormState = {
   utmParams: {},
 }
 
-export const useFormStore = create<FormStore>((set) => ({
+export const useFormStore = create<FormStore>((set, get) => ({
   ...initialState,
   initializeSession: () => {
     const sessionId = crypto.randomUUID()
@@ -75,5 +76,10 @@ export const useFormStore = create<FormStore>((set) => ({
   },
   updateField: (field, value) => set({ [field]: value }),
   updateMultipleFields: (updates) => set(updates),
+  addTriggeredEvents: (events) => {
+    const currentEvents = get().triggeredEvents
+    const newEvents = [...currentEvents, ...events]
+    set({ triggeredEvents: newEvents })
+  },
   resetForm: () => set(initialState),
 }))

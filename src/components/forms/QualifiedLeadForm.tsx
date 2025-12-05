@@ -3,6 +3,7 @@ import { useFormStore } from '../../store/formStore'
 import { page2ASchema } from '../../lib/validation'
 import { saveFormDataIncremental } from '../../lib/formTracking'
 import { Button } from '../Button'
+import { trackPage2Submit, trackFormComplete } from '../../lib/metaEvents'
 
 interface QualifiedLeadFormProps {
   onComplete: () => void
@@ -185,6 +186,23 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
       console.log('QualifiedLeadForm final save - isCounsellingBooked:', formState.isCounsellingBooked)
       console.log('QualifiedLeadForm final save - pageCompleted:', formState.pageCompleted)
 
+      console.log('🎯 Tracking Page 2 Submit Events...')
+      const page2SubmitEvents = trackPage2Submit(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      console.log('🎯 Tracking Form Complete Events...')
+      const formCompleteEvents = trackFormComplete(
+        formState.leadCategory || undefined,
+        formState.isQualifiedLead,
+        formState.formFillerType as 'parent' | 'student'
+      )
+
+      const allMetaEvents = [...page2SubmitEvents, ...formCompleteEvents]
+      formState.addTriggeredEvents(allMetaEvents)
+
       await saveFormDataIncremental(
         formState.sessionId,
         {
@@ -197,6 +215,7 @@ export const QualifiedLeadForm: React.FC<QualifiedLeadFormProps> = ({ onComplete
           leadCategory: formState.leadCategory,
           isCounsellingBooked: formState.isCounsellingBooked,
           pageCompleted: formState.pageCompleted,
+          triggeredEvents: formState.triggeredEvents,
         },
         '10_form_submit'
       )

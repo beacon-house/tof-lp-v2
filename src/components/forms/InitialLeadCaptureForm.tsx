@@ -4,6 +4,11 @@ import { page1Schema } from '../../lib/validation'
 import { categorizeLeadByProgram } from '../../lib/leadCategorization'
 import { saveFormDataIncremental } from '../../lib/formTracking'
 import { Button } from '../Button'
+import {
+  trackPrimaryClassificationEvents,
+  trackPage1CompleteWithCategory,
+  MetaEventData
+} from '../../lib/metaEvents'
 
 interface InitialLeadCaptureFormProps {
   onComplete: () => void
@@ -151,6 +156,27 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
       const isQualified = ['bch', 'lum-l1', 'lum-l2'].includes(leadCategory)
       console.log('Is qualified lead:', isQualified)
 
+      const metaEventData: MetaEventData = {
+        formFillerType: formState.formFillerType as 'parent' | 'student',
+        currentGrade: formState.currentGrade,
+        scholarshipRequirement: formState.scholarshipRequirement,
+        targetGeographies: formState.targetGeographies,
+        gpaValue: formState.gpaValue,
+        percentageValue: formState.percentageValue,
+        gradeFormat: formState.gradeFormat,
+        leadCategory,
+        isQualified,
+      }
+
+      console.log('🎯 Tracking Primary Classification Events...')
+      const primaryEvents = trackPrimaryClassificationEvents(metaEventData)
+
+      console.log('🎯 Tracking Page 1 Complete with Category Events...')
+      const page1Events = trackPage1CompleteWithCategory(metaEventData, leadCategory)
+
+      const allMetaEvents = [...primaryEvents, ...page1Events]
+      formState.addTriggeredEvents(allMetaEvents)
+
       formState.updateMultipleFields({
         leadCategory,
         isQualifiedLead: isQualified,
@@ -167,6 +193,7 @@ export const InitialLeadCaptureForm: React.FC<InitialLeadCaptureFormProps> = ({ 
           isQualifiedLead: isQualified,
           pageCompleted: 1,
           utmParams: formState.utmParams,
+          triggeredEvents: formState.triggeredEvents,
         },
         '05_page1_complete'
       )
