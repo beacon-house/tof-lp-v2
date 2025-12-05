@@ -34,11 +34,11 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ onShowForm }) => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 md:mt-10">
-          <Button variant="primary" onClick={handleBookCall}>
+          <Button variant="primary" onClick={handleBookCall} className="w-full sm:w-auto sm:min-w-[280px]">
             Book a Founder Strategy Call
           </Button>
-          <Button variant="secondary" onClick={handleRequestEvaluation}>
-            Request Evaluation
+          <Button variant="secondary" onClick={handleRequestEvaluation} className="w-full sm:w-auto sm:min-w-[280px]">
+            Request an Evaluation
           </Button>
         </div>
       </div>

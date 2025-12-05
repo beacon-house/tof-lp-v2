@@ -1,29 +1,31 @@
 // Main App component integrating all sections with progressive reveal functionality
-import { useState, useRef, lazy, Suspense, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { HeroSection } from './components/sections/HeroSection'
 import { FormSection } from './components/sections/FormSection'
+import { PainPointSection } from './components/sections/PainPointSection'
+import { AuthoritySection } from './components/sections/AuthoritySection'
+import { BridgeSection } from './components/sections/BridgeSection'
+import { AchievementsSection } from './components/sections/AchievementsSection'
+import { WhoWeAreSection } from './components/sections/WhoWeAreSection'
+import { ResultsSection } from './components/sections/ResultsSection'
+import { ProcessSection } from './components/sections/ProcessSection'
+import { TrustSection } from './components/sections/TrustSection'
 import { initializeMetaPixel, trackPageView } from './lib/metaEvents'
-
-const PainPointSection = lazy(() => import('./components/sections/PainPointSection').then(m => ({ default: m.PainPointSection })))
-const AuthoritySection = lazy(() => import('./components/sections/AuthoritySection').then(m => ({ default: m.AuthoritySection })))
-const BridgeSection = lazy(() => import('./components/sections/BridgeSection').then(m => ({ default: m.BridgeSection })))
-const AchievementsSection = lazy(() => import('./components/sections/AchievementsSection').then(m => ({ default: m.AchievementsSection })))
-const WhoWeAreSection = lazy(() => import('./components/sections/WhoWeAreSection').then(m => ({ default: m.WhoWeAreSection })))
-const ResultsSection = lazy(() => import('./components/sections/ResultsSection').then(m => ({ default: m.ResultsSection })))
-const ProcessSection = lazy(() => import('./components/sections/ProcessSection').then(m => ({ default: m.ProcessSection })))
-const TrustSection = lazy(() => import('./components/sections/TrustSection').then(m => ({ default: m.TrustSection })))
 
 function App() {
   const [showFirstGroup, setShowFirstGroup] = useState(false)
   const [showSecondGroup, setShowSecondGroup] = useState(false)
   const [showForm, setShowForm] = useState(false)
+  const [showStickyCTA, setShowStickyCTA] = useState(false)
   const firstGroupRef = useRef<HTMLDivElement>(null)
   const secondGroupRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
   const firstTriggerRef = useRef<HTMLDivElement>(null)
   const secondTriggerRef = useRef<HTMLDivElement>(null)
+  const bridgeSectionRef = useRef<HTMLDivElement>(null)
+  const trustSectionRef = useRef<HTMLDivElement>(null)
 
   const handleLearnMore = () => {
     setShowFirstGroup(true)
@@ -95,43 +97,79 @@ function App() {
     }
   }, [showFirstGroup, showSecondGroup])
 
+  useEffect(() => {
+    const stickyObserver = new IntersectionObserver(
+      (entries) => {
+        const bridgeEntry = entries.find(e => e.target === bridgeSectionRef.current)
+        const trustEntry = entries.find(e => e.target === trustSectionRef.current)
+
+        if (trustEntry && trustEntry.isIntersecting) {
+          setShowStickyCTA(false)
+        } else if (bridgeEntry && !bridgeEntry.isIntersecting && bridgeEntry.boundingClientRect.top < 0) {
+          setShowStickyCTA(true)
+        }
+      },
+      { threshold: [0, 0.1], rootMargin: '-100px 0px 0px 0px' }
+    )
+
+    if (bridgeSectionRef.current) {
+      stickyObserver.observe(bridgeSectionRef.current)
+    }
+    if (trustSectionRef.current) {
+      stickyObserver.observe(trustSectionRef.current)
+    }
+
+    return () => {
+      stickyObserver.disconnect()
+    }
+  }, [showFirstGroup, showSecondGroup])
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <Header />
+      <Header showStickyCTA={showStickyCTA && !showForm} onCTAClick={handleShowForm} />
 
       <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
 
         <div ref={firstTriggerRef} className="h-1" />
 
-        {showFirstGroup && (
-          <div ref={firstGroupRef}>
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-navy"></div></div>}>
-              <PainPointSection />
-              <AuthoritySection />
-              <BridgeSection onUnderstandApproach={handleUnderstandApproach} />
-            </Suspense>
+        <div ref={firstGroupRef} className={`transition-all duration-500 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+          <PainPointSection />
+          <AuthoritySection />
+          <div ref={bridgeSectionRef}>
+            <BridgeSection onUnderstandApproach={handleUnderstandApproach} />
           </div>
-        )}
+        </div>
 
         <div ref={secondTriggerRef} className="h-1" />
 
-        {showSecondGroup && (
-          <div ref={secondGroupRef}>
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-navy"></div></div>}>
-              <AchievementsSection />
-              <WhoWeAreSection />
-              <ResultsSection />
-              <ProcessSection />
-              <TrustSection onShowForm={handleShowForm} />
-            </Suspense>
+        <div ref={secondGroupRef} className={`transition-all duration-500 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+          <AchievementsSection />
+          <WhoWeAreSection />
+          <ResultsSection />
+          <ProcessSection />
+          <div ref={trustSectionRef}>
+            <TrustSection onShowForm={handleShowForm} />
           </div>
-        )}
+        </div>
       </main>
 
       {showForm && (
         <div ref={formRef} className="w-full">
           <FormSection onClose={handleCloseForm} />
+        </div>
+      )}
+
+      {showStickyCTA && !showForm && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-navy/10 shadow-luxury animate-fade-in">
+          <div className="max-w-content mx-auto px-6 py-3">
+            <button
+              onClick={handleShowForm}
+              className="w-full h-12 rounded-lg font-semibold text-base bg-gradient-to-r from-gold to-goldLight text-navy shadow-sm hover:shadow-glow transition-all duration-300"
+            >
+              Book a Founder Strategy Call
+            </button>
+          </div>
         </div>
       )}
 

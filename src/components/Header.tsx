@@ -1,7 +1,12 @@
 // Sticky header with minimal clean design
 import React, { useState, useEffect } from 'react'
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  showStickyCTA?: boolean
+  onCTAClick?: () => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ showStickyCTA = false, onCTAClick }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -39,41 +44,75 @@ export const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <button
-              onClick={() => scrollToSection('pain-point')}
-              className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
-            >
-              The Challenge
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
-            >
-              About Us
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection('results')}
-              className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
-            >
-              Results
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection('process')}
-              className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
-            >
-              Our Process
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
-            >
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
+            {!showStickyCTA ? (
+              <>
+                <button
+                  onClick={() => scrollToSection('pain-point')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  The Challenge
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  About Us
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('results')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  Results
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('process')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  Our Process
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  Contact
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => scrollToSection('about')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  About
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('results')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  Results
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="text-navy hover:text-gold transition-colors font-medium text-sm relative group"
+                >
+                  Contact
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300"></span>
+                </button>
+                <button
+                  onClick={onCTAClick}
+                  className="h-10 px-6 rounded-lg font-semibold text-sm bg-gradient-to-r from-gold to-goldLight text-navy shadow-sm hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300 animate-fade-in"
+                >
+                  Book a Founder Strategy Call
+                </button>
+              </>
+            )}
           </nav>
 
           <button
