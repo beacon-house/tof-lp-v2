@@ -1,11 +1,11 @@
 // Section B - The Real Pain Point section
-import React from 'react'
+import { forwardRef } from 'react'
 import { Section } from '../Section'
 import { TextContainer } from '../TextContainer'
 
-export const PainPointSection: React.FC = () => {
+export const PainPointSection = forwardRef<HTMLDivElement>((_props, ref) => {
   return (
-    <Section id="pain-point" className="relative md:min-h-screen flex items-center bg-white">
+    <Section ref={ref} id="pain-point" className="relative md:min-h-screen flex items-center bg-white">
       <div className="grid lg:grid-cols-2 gap-4 md:gap-8 lg:gap-16 items-center w-full">
         <TextContainer>
 
@@ -74,4 +74,4 @@ export const PainPointSection: React.FC = () => {
       </div>
     </Section>
   )
-}
+})

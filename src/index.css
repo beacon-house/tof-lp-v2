@@ -21,6 +21,18 @@
     scroll-snap-align: start;
     scroll-snap-stop: normal;
   }
+
+  #pain-point,
+  #achievements {
+    scroll-margin-top: 64px;
+  }
+
+  @media (min-width: 768px) {
+    #pain-point,
+    #achievements {
+      scroll-margin-top: 80px;
+    }
+  }
 }
 
 @layer utilities {
