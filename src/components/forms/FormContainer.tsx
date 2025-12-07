@@ -124,6 +124,12 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
     setCurrentStep('success')
   }
 
+  useEffect(() => {
+    if (currentStep === 'page2a' || currentStep === 'page2b' || currentStep === 'success') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [currentStep])
+
   const getSuccessMessage = () => {
     const { leadCategory, currentGrade, formFillerType, selectedDate, selectedSlot } = formState
 
@@ -173,8 +179,8 @@ export const FormContainer: React.FC<FormContainerProps> = ({ onClose }) => {
       )}
 
       {currentStep === 'success' && (
-        <div className="animate-fadeIn w-full max-w-2xl mx-auto py-12 px-6">
-          <div className="text-center space-y-6">
+        <div className="animate-fadeIn w-full min-h-screen flex items-center justify-center px-6">
+          <div className="text-center space-y-6 max-w-2xl mx-auto">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
               <svg
                 className="w-10 h-10 text-green-600"
