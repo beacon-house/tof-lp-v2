@@ -127,45 +127,45 @@ export const ResultsSection: React.FC = () => {
                 className="bg-white border border-gold/10 rounded-2xl p-2 md:p-4 shadow-sm hover:shadow-luxury transition-all duration-300 hover:-translate-y-1"
               >
                 {/* University Name */}
-                <h3 className="text-xs md:text-base font-bold text-navy mb-1 md:mb-3">
+                <h3 className="text-base md:text-xl font-bold text-navy mb-2 md:mb-3">
                   {item.university}
                 </h3>
 
                 {/* Other Students */}
-                <div className="mb-1 md:mb-2">
+                <div className="mb-2 md:mb-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-[10px] md:text-xs text-navy/60">Other Students</span>
-                    <span className="text-[10px] md:text-xs font-semibold text-navy/70">
+                    <span className="text-xs md:text-sm text-navy/60 font-medium">Other Students</span>
+                    <span className="text-xs md:text-sm font-semibold text-navy/70">
                       {item.otherStudents} out of 100
                     </span>
                   </div>
-                  <div className="w-full bg-navy/10 rounded-full h-1.5 md:h-2">
+                  <div className="w-full bg-navy/10 rounded-full h-2 md:h-2.5">
                     <div
-                      className="bg-navy/40 h-1.5 md:h-2 rounded-full transition-all duration-500"
+                      className="bg-navy/40 h-2 md:h-2.5 rounded-full transition-all duration-500"
                       style={{ width: `${item.otherStudents}%` }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Our Students */}
-                <div className="mb-1 md:mb-2">
+                <div className="mb-2 md:mb-3">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-[10px] md:text-xs text-navy/60">Our Students</span>
-                    <span className="text-[10px] md:text-xs font-semibold text-navy">
+                    <span className="text-xs md:text-sm text-navy/60 font-medium">Our Students</span>
+                    <span className="text-xs md:text-sm font-semibold text-navy">
                       {item.ourStudents} out of 100
                     </span>
                   </div>
-                  <div className="w-full bg-navy/10 rounded-full h-1.5 md:h-2">
+                  <div className="w-full bg-navy/10 rounded-full h-2 md:h-2.5">
                     <div
-                      className="bg-gradient-to-r from-gold to-goldLight h-1.5 md:h-2 rounded-full transition-all duration-500 shadow-sm"
+                      className="bg-gradient-to-r from-gold to-goldLight h-2 md:h-2.5 rounded-full transition-all duration-500 shadow-sm"
                       style={{ width: `${item.ourStudents}%` }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Success Rate Badge */}
-                <div className="flex justify-center mt-1 md:mt-2">
-                  <span className="inline-block bg-navy/5 text-navy text-[10px] md:text-xs font-semibold px-2 py-0.5 md:py-1 rounded-full">
+                <div className="flex justify-center mt-2 md:mt-3">
+                  <span className="inline-block bg-navy/5 text-navy text-xs md:text-sm font-semibold px-3 py-1 md:py-1.5 rounded-full">
                     {item.multiplier} Higher
                   </span>
                 </div>
