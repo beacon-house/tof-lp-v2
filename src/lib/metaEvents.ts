@@ -288,11 +288,31 @@ export function trackMofPageView(): string[] {
 }
 
 export function trackMofCtaClick(ctaType: 'book_call' | 'request_evaluation'): string[] {
-  return [trackMetaEvent('mof_v1_cta_click', { ctaType })]
+  const events: string[] = []
+
+  // Common event that fires for ALL CTA clicks
+  events.push(trackMetaEvent('mof_v1_cta_click'))
+
+  // Specific event based on button type
+  if (ctaType === 'book_call') {
+    events.push(trackMetaEvent('mof_v1_book_call'))
+  } else if (ctaType === 'request_evaluation') {
+    events.push(trackMetaEvent('mof_v1_request_evaluation'))
+  }
+
+  return events
 }
 
 export function trackMofStickyCtaClick(): string[] {
-  return [trackMetaEvent('mof_v1_sticky_cta_click')]
+  const events: string[] = []
+
+  // Common event that fires for ALL CTA clicks
+  events.push(trackMetaEvent('mof_v1_cta_click'))
+
+  // Specific event for sticky CTA
+  events.push(trackMetaEvent('mof_v1_sticky_cta_click'))
+
+  return events
 }
 
 export function trackCallScheduled(data?: MetaEventData): string[] {
