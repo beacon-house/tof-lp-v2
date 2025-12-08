@@ -22,7 +22,14 @@ export const Header: React.FC<HeaderProps> = ({ showStickyCTA = false, onCTAClic
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      const headerOffset = window.innerWidth < 768 ? 64 : 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
       setIsMobileMenuOpen(false)
     }
   }
