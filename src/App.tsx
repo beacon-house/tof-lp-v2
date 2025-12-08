@@ -12,20 +12,20 @@ import { WhoWeAreSection } from './components/sections/WhoWeAreSection'
 import { ResultsSection } from './components/sections/ResultsSection'
 import { ProcessSection } from './components/sections/ProcessSection'
 import { TrustSection } from './components/sections/TrustSection'
-import { initializeMetaPixel, trackPageView } from './lib/metaEvents'
+import { initializeMetaPixel, trackPageView, trackUnderstandApproachCTA } from './lib/metaEvents'
 
 function App() {
   const [showFirstGroup, setShowFirstGroup] = useState(false)
   const [showSecondGroup, setShowSecondGroup] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showStickyCTA, setShowStickyCTA] = useState(false)
-  const firstGroupRef = useRef<HTMLDivElement>(null)
-  const secondGroupRef = useRef<HTMLDivElement>(null)
+  const [stickyCtaActivated, setStickyCtaActivated] = useState(false)
+  const [isInProcessSection, setIsInProcessSection] = useState(false)
+  const [isInTrustSection, setIsInTrustSection] = useState(false)
   const formRef = useRef<HTMLDivElement>(null)
-  const firstTriggerRef = useRef<HTMLDivElement>(null)
-  const secondTriggerRef = useRef<HTMLDivElement>(null)
   const bridgeSectionRef = useRef<HTMLDivElement>(null)
   const trustSectionRef = useRef<HTMLDivElement>(null)
+  const processSectionRef = useRef<HTMLDivElement>(null)
   const painPointRef = useRef<HTMLDivElement>(null)
   const achievementsRef = useRef<HTMLDivElement>(null)
 
@@ -46,7 +46,9 @@ function App() {
   }
 
   const handleUnderstandApproach = () => {
+    trackUnderstandApproachCTA()
     setShowSecondGroup(true)
+    setStickyCtaActivated(true)
     setTimeout(() => {
       if (achievementsRef.current) {
         const headerOffset = window.innerWidth < 768 ? 64 : 80
@@ -79,61 +81,22 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const firstObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !showFirstGroup) {
-            setShowFirstGroup(true)
-            firstObserver.disconnect()
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '100px' }
-    )
-
-    const secondObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !showSecondGroup) {
-            setShowSecondGroup(true)
-            secondObserver.disconnect()
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '100px' }
-    )
-
-    if (firstTriggerRef.current) {
-      firstObserver.observe(firstTriggerRef.current)
-    }
-
-    if (secondTriggerRef.current && showFirstGroup) {
-      secondObserver.observe(secondTriggerRef.current)
-    }
-
-    return () => {
-      firstObserver.disconnect()
-      secondObserver.disconnect()
-    }
-  }, [showFirstGroup, showSecondGroup])
-
-  useEffect(() => {
     const stickyObserver = new IntersectionObserver(
       (entries) => {
-        const bridgeEntry = entries.find(e => e.target === bridgeSectionRef.current)
-        const trustEntry = entries.find(e => e.target === trustSectionRef.current)
-
-        if (trustEntry && trustEntry.isIntersecting) {
-          setShowStickyCTA(false)
-        } else if (bridgeEntry && !bridgeEntry.isIntersecting && bridgeEntry.boundingClientRect.top < 0) {
-          setShowStickyCTA(true)
-        }
+        entries.forEach((entry) => {
+          if (entry.target === processSectionRef.current) {
+            setIsInProcessSection(entry.isIntersecting)
+          }
+          if (entry.target === trustSectionRef.current) {
+            setIsInTrustSection(entry.isIntersecting)
+          }
+        })
       },
-      { threshold: [0, 0.1], rootMargin: '-100px 0px 0px 0px' }
+      { threshold: [0, 0.5], rootMargin: '0px' }
     )
 
-    if (bridgeSectionRef.current) {
-      stickyObserver.observe(bridgeSectionRef.current)
+    if (processSectionRef.current) {
+      stickyObserver.observe(processSectionRef.current)
     }
     if (trustSectionRef.current) {
       stickyObserver.observe(trustSectionRef.current)
@@ -142,7 +105,15 @@ function App() {
     return () => {
       stickyObserver.disconnect()
     }
-  }, [showFirstGroup, showSecondGroup])
+  }, [showSecondGroup])
+
+  useEffect(() => {
+    if (stickyCtaActivated && !isInProcessSection && !isInTrustSection) {
+      setShowStickyCTA(true)
+    } else {
+      setShowStickyCTA(false)
+    }
+  }, [stickyCtaActivated, isInProcessSection, isInTrustSection])
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -151,9 +122,7 @@ function App() {
       <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
 
-        <div ref={firstTriggerRef} className="h-1" />
-
-        <div ref={firstGroupRef} className={`transition-all duration-500 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`transition-all duration-200 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <PainPointSection ref={painPointRef} />
           <AuthoritySection />
           <div ref={bridgeSectionRef}>
@@ -161,13 +130,13 @@ function App() {
           </div>
         </div>
 
-        <div ref={secondTriggerRef} className="h-1" />
-
-        <div ref={secondGroupRef} className={`transition-all duration-500 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`transition-all duration-200 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <AchievementsSection ref={achievementsRef} />
           <WhoWeAreSection />
           <ResultsSection />
-          <ProcessSection />
+          <div ref={processSectionRef}>
+            <ProcessSection />
+          </div>
           <div ref={trustSectionRef}>
             <TrustSection onShowForm={handleShowForm} />
           </div>

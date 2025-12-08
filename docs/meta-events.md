@@ -15,12 +15,13 @@
 | `tof_qualfd_stdnt_{env}` | Page 1 completion | Student filled \+ would qualify as parent |
 | `tof_disqualfd_stdnt_{env}` | Page 1 completion | Student filled \+ would not qualify as parent OR spam |
 
-### General Funnel Events (7 events)
+### General Funnel Events (8 events)
 
 | Event Name | Trigger | Description |
 | :---- | :---- | :---- |
 | `tof_page_view_{env}` | Component mount/step change | Page view tracking |
 | `tof_cta_hero_{env}` | Hero CTA button click | Landing page hero section CTA |
+| `tof_cta_understand_our_approach_{env}` | Bridge Section CTA button click | "Understand Our Approach" button click |
 | `tof_page_1_continue_{env}` | Page 1 submission | User clicks continue on Page 1 |
 | `tof_page_2_view_{env}` | Page 2 load | User reaches Page 2 |
 | `tof_page_2_submit_{env}` | Page 2 submission | User submits Page 2 |
@@ -117,6 +118,26 @@ Environment value comes from `VITE_ENVIRONMENT` variable.
 
 ## Event Storage
 
-- Events are tracked in form state via `triggeredEvents` array  
-- Events are included in webhook payload for database storage  
+- Events are tracked in form state via `triggeredEvents` array
+- Events are included in webhook payload for database storage
 - Events are sent to both Meta Pixel and Google Analytics
+
+## Proposed Event Architecture Mapping
+
+### Unique Events Not Yet Implemented
+
+- `bh_mof_page_view` - MOF page view tracking
+- `bh_mof_cta_click` - MOF CTA button clicks
+- `bh_call_scheduled` - Call booking confirmation
+
+### Event Mapping Table
+
+| Proposed Event | Implemented Event | Status |
+| :---- | :---- | :---- |
+| `bh_tof_approach_click` | `tof_cta_understand_our_approach_{env}` | ✅ Implemented |
+| `bh_mof_page_view` | - | ❌ Not Implemented |
+| `bh_mof_cta_click` | - | ❌ Not Implemented |
+| `bh_questionnaire_load` | `tof_page_2_view_{env}` | ✅ Implemented |
+| `bh_questionnaire_submit` | `tof_form_complete_{env}` | ✅ Implemented |
+| `bh_qualified_lead` | `tof_qualfd_prnt_{env}` / `tof_qualfd_stdnt_{env}` | ✅ Implemented |
+| `bh_call_scheduled` | - | ❌ Not Implemented |

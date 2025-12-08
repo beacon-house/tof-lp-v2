@@ -69,8 +69,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
                 </svg>
               </div>
               <div className="text-center">
-                <p className="font-bold text-base md:text-lg text-navy mb-0.5">620+ Ivy League</p>
-                <p className="text-xs md:text-sm text-navy/60">admits</p>
+                <p className="font-bold text-base md:text-lg text-navy mb-0.5">120+ Ivy League</p>
+                <p className="text-xs md:text-sm text-navy/60">admits in 2025</p>
               </div>
             </div>
 
@@ -83,8 +83,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
                 </svg>
               </div>
               <div className="text-center">
-                <p className="font-bold text-base md:text-lg text-navy mb-0.5">35+ IB & IGCSE</p>
-                <p className="text-xs md:text-sm text-navy/60">schools</p>
+                <p className="font-bold text-base md:text-lg text-navy mb-0.5">Trusted By</p>
+                <p className="text-xs md:text-sm text-navy/60">IB & IGCSE community
+</p>
               </div>
             </div>
 
@@ -96,8 +97,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
                 </svg>
               </div>
               <div className="text-center">
-                <p className="font-bold text-base md:text-lg text-navy mb-0.5">FAO-led</p>
-                <p className="text-xs md:text-sm text-navy/60">guidance</p>
+                <p className="font-bold text-base md:text-lg text-navy mb-0.5">Guided By</p>
+                <p className="text-xs md:text-sm text-navy/60">Former Admissions Officers</p>
               </div>
             </div>
 
