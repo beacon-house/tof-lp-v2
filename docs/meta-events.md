@@ -1,5 +1,16 @@
 # Custom Meta Pixel Events
 
+## Total Event Count
+
+**43 Total Events** across all categories:
+- 8 Primary Lead Classification Events
+- 15 General Funnel Events
+- 4 BCH Lead Specific Events
+- 4 Luminaire L1 Lead Specific Events
+- 4 Luminaire L2 Lead Specific Events
+- 4 Qualified Parent Specific Events
+- 4 Qualified Student Specific Events
+
 ## Event Categories
 
 ### Primary Lead Classification Events (8 events)
@@ -15,7 +26,7 @@
 | `mof_v1_qualfd_stdnt_{env}` | Page 1 completion | Student filled \+ would qualify as parent |
 | `mof_v1_disqualfd_stdnt_{env}` | Page 1 completion | Student filled \+ would not qualify as parent OR spam |
 
-### General Funnel Events (12 events)
+### General Funnel Events (15 events)
 
 | Event Name | Trigger | Description |
 | :---- | :---- | :---- |
@@ -23,8 +34,10 @@
 | `tof_v1_cta_hero_{env}` | Hero CTA button click | Landing page hero section CTA |
 | `tof_v1_cta_understand_our_approach_{env}` | Bridge Section CTA button click | "Understand Our Approach" button click |
 | `mof_v1_page_view_{env}` | MOF sections become visible | Fires after clicking "Understand Our Approach" |
-| `mof_v1_cta_click_{env}` | TrustSection CTA clicks | Fires when user clicks either "Book a Founder Strategy Call" or "Request an Evaluation" button (includes ctaType parameter: 'book_call' or 'request_evaluation') |
-| `mof_v1_sticky_cta_click_{env}` | Mobile sticky CTA click | Fires when user clicks mobile sticky CTA at bottom (mobile only) |
+| `mof_v1_cta_click_{env}` | **ANY CTA button click** | **Common event** that fires for ALL CTA clicks (Book Call, Request Evaluation, and Sticky CTA) |
+| `mof_v1_book_call_{env}` | "Book a Founder Strategy Call" button click | Specific event for Book Call button in TrustSection |
+| `mof_v1_request_evaluation_{env}` | "Request an Evaluation" button click | Specific event for Request Evaluation button in TrustSection |
+| `mof_v1_sticky_cta_click_{env}` | Mobile sticky CTA click | Specific event for sticky CTA at bottom (mobile/desktop) |
 | `mof_v1_call_scheduled_{env}` | Date and time slot selected | Fires when qualified lead selects both date AND time slot on Page 2A (when isCounsellingBooked becomes true) |
 | `mof_v1_page_1_continue_{env}` | Page 1 submission | User clicks continue on Page 1 |
 | `mof_v1_page_2_view_{env}` | Page 2 load | User reaches Page 2 |
@@ -140,28 +153,59 @@ Environment value comes from `VITE_ENVIRONMENT` variable.
 | `bh_qualified_lead` | `mof_v1_qualfd_prnt_{env}` / `mof_v1_qualfd_stdnt_{env}` | ✅ Implemented |
 | `bh_call_scheduled` | `mof_v1_call_scheduled_{env}` | ✅ Implemented |
 
-## New Events Summary
+## CTA Event Tracking Architecture
 
-### Recently Implemented Events (4 new events)
+### Dual-Layer Event System
 
-1. **`mof_v1_page_view_{env}`**
-   - **Trigger**: Fires when MOF sections (Achievements, WhoWeAre, Results, Process, Trust) become visible after user clicks "Understand Our Approach" button
-   - **Location**: App.tsx - handleUnderstandApproach function
+When ANY CTA button is clicked, **TWO events fire**:
+1. **Common Event**: `mof_v1_cta_click_{env}` (tracks ALL CTA interactions)
+2. **Specific Event**: Button-specific event (tracks which button was clicked)
 
-2. **`mof_v1_cta_click_{env}`**
-   - **Trigger**: Fires when user clicks either button in TrustSection
-     - "Book a Founder Strategy Call" (ctaType: 'book_call')
-     - "Request an Evaluation" (ctaType: 'request_evaluation')
-   - **Parameters**: `{ ctaType: 'book_call' | 'request_evaluation' }`
-   - **Location**: TrustSection.tsx - handleBookCall and handleRequestEvaluation functions
+### CTA Event Combinations
 
-3. **`mof_v1_sticky_cta_click_{env}`**
-   - **Trigger**: Fires when user clicks the mobile sticky CTA button at bottom of screen (mobile only, appears after scrolling)
-   - **Button Text**: "Request an Evaluation"
-   - **Location**: StickyMobileCTA.tsx - handleClick function
+#### "Book a Founder Strategy Call" Button (TrustSection)
+Fires 2 events:
+- `mof_v1_cta_click_{env}` (common)
+- `mof_v1_book_call_{env}` (specific)
 
-4. **`mof_v1_call_scheduled_{env}`**
-   - **Trigger**: Fires when qualified lead selects both date AND time slot on Page 2A (QualifiedLeadForm)
-   - **Condition**: When `isCounsellingBooked` becomes `true`
-   - **Parameters**: Includes lead metadata (leadCategory, isQualified, formFillerType, selectedDate, selectedSlot)
-   - **Location**: QualifiedLeadForm.tsx - handleFieldChange function
+#### "Request an Evaluation" Button (TrustSection)
+Fires 2 events:
+- `mof_v1_cta_click_{env}` (common)
+- `mof_v1_request_evaluation_{env}` (specific)
+
+#### Sticky CTA Button (Mobile/Desktop - Bottom)
+Fires 2 events:
+- `mof_v1_cta_click_{env}` (common)
+- `mof_v1_sticky_cta_click_{env}` (specific)
+
+### Implementation Details
+
+**Location**: `src/lib/metaEvents.ts`
+
+```typescript
+// Fires 2 events for TrustSection buttons
+export function trackMofCtaClick(ctaType: 'book_call' | 'request_evaluation'): string[] {
+  const events: string[] = []
+  events.push(trackMetaEvent('mof_v1_cta_click')) // Common
+  if (ctaType === 'book_call') {
+    events.push(trackMetaEvent('mof_v1_book_call')) // Specific
+  } else if (ctaType === 'request_evaluation') {
+    events.push(trackMetaEvent('mof_v1_request_evaluation')) // Specific
+  }
+  return events
+}
+
+// Fires 2 events for Sticky CTA
+export function trackMofStickyCtaClick(): string[] {
+  const events: string[] = []
+  events.push(trackMetaEvent('mof_v1_cta_click')) // Common
+  events.push(trackMetaEvent('mof_v1_sticky_cta_click')) // Specific
+  return events
+}
+```
+
+### Benefits of Dual-Layer System
+
+1. **Aggregate Tracking**: `mof_v1_cta_click_{env}` provides total CTA engagement across all buttons
+2. **Granular Analysis**: Specific events show which CTAs perform best
+3. **Flexible Reporting**: Can analyze both individual and combined performance
