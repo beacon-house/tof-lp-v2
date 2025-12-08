@@ -50,13 +50,9 @@ export const BridgeSection: React.FC<BridgeSectionProps> = ({ onUnderstandApproa
       <div className="w-full">
         {/* Header */}
         <div className="text-center mb-5 md:mb-7 max-w-3xl mx-auto">
-
-
           <h2 className="font-serif text-lg md:text-2xl lg:text-3xl text-navy mb-4 leading-tight font-bold">
             Here's how we help families build that clarity
           </h2>
-
-          <div className="h-1 w-24 bg-gradient-to-r from-gold to-goldLight rounded-full mx-auto"></div>
         </div>
 
         {/* Benefits Grid - All screen sizes */}
