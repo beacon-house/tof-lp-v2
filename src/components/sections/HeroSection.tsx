@@ -83,8 +83,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLearnMore }) => {
                 </svg>
               </div>
               <div className="text-center">
-                <p className="font-bold text-base md:text-lg text-navy mb-0.5">Trusted By</p>
-                <p className="text-xs md:text-sm text-navy/60">IB, IGCSE Community</p>
+                <p className="font-bold text-base md:text-lg text-navy mb-0.5">Trusted By Parents</p>
+                <p className="text-xs md:text-sm text-navy/60">at leading IB & IGCSE Schools
+</p>
               </div>
             </div>
 
