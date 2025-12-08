@@ -78,6 +78,34 @@ function App() {
     setShowForm(false)
   }
 
+  const handleNavigationClick = (sectionId: string) => {
+    const firstGroupSections = ['pain-point']
+    const secondGroupSections = ['about', 'results', 'comparison', 'process']
+
+    if (firstGroupSections.includes(sectionId)) {
+      setShowFirstGroup(true)
+    } else if (secondGroupSections.includes(sectionId)) {
+      setShowFirstGroup(true)
+      setShowSecondGroup(true)
+      setStickyCtaActivated(true)
+      trackMofPageView()
+    }
+
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        const headerOffset = window.innerWidth < 768 ? 64 : 80
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }, 300)
+  }
+
   useEffect(() => {
     console.log('🎯 Initializing Meta Pixel and tracking page view...')
     initializeMetaPixel()
@@ -145,7 +173,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <Header showStickyCTA={showStickyCTA && !showForm} onCTAClick={handleShowForm} />
+      <Header
+        showStickyCTA={showStickyCTA && !showForm}
+        onCTAClick={handleShowForm}
+        onNavigate={handleNavigationClick}
+      />
 
       <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
