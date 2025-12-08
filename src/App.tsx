@@ -19,11 +19,7 @@ function App() {
   const [showSecondGroup, setShowSecondGroup] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showStickyCTA, setShowStickyCTA] = useState(false)
-  const firstGroupRef = useRef<HTMLDivElement>(null)
-  const secondGroupRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
-  const firstTriggerRef = useRef<HTMLDivElement>(null)
-  const secondTriggerRef = useRef<HTMLDivElement>(null)
   const bridgeSectionRef = useRef<HTMLDivElement>(null)
   const trustSectionRef = useRef<HTMLDivElement>(null)
   const painPointRef = useRef<HTMLDivElement>(null)
@@ -80,45 +76,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const firstObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !showFirstGroup) {
-            setShowFirstGroup(true)
-            firstObserver.disconnect()
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '100px' }
-    )
-
-    const secondObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !showSecondGroup) {
-            setShowSecondGroup(true)
-            secondObserver.disconnect()
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '100px' }
-    )
-
-    if (firstTriggerRef.current) {
-      firstObserver.observe(firstTriggerRef.current)
-    }
-
-    if (secondTriggerRef.current && showFirstGroup) {
-      secondObserver.observe(secondTriggerRef.current)
-    }
-
-    return () => {
-      firstObserver.disconnect()
-      secondObserver.disconnect()
-    }
-  }, [showFirstGroup, showSecondGroup])
-
-  useEffect(() => {
     const stickyObserver = new IntersectionObserver(
       (entries) => {
         const bridgeEntry = entries.find(e => e.target === bridgeSectionRef.current)
@@ -152,9 +109,7 @@ function App() {
       <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
 
-        <div ref={firstTriggerRef} className="h-1" />
-
-        <div ref={firstGroupRef} className={`transition-all duration-500 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`transition-all duration-200 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <PainPointSection ref={painPointRef} />
           <AuthoritySection />
           <div ref={bridgeSectionRef}>
@@ -162,9 +117,7 @@ function App() {
           </div>
         </div>
 
-        <div ref={secondTriggerRef} className="h-1" />
-
-        <div ref={secondGroupRef} className={`transition-all duration-500 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`transition-all duration-200 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <AchievementsSection ref={achievementsRef} />
           <WhoWeAreSection />
           <ResultsSection />
