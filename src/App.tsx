@@ -1,5 +1,5 @@
 // Main App component integrating all sections with progressive reveal functionality
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
@@ -24,6 +24,7 @@ function App() {
   const [stickyCtaActivated, setStickyCtaActivated] = useState(false)
   const [isInProcessSection, setIsInProcessSection] = useState(false)
   const [isInTrustSection, setIsInTrustSection] = useState(false)
+  const [isDirectRouteLoad, setIsDirectRouteLoad] = useState(false)
   const formRef = useRef<HTMLDivElement>(null)
   const bridgeSectionRef = useRef<HTMLDivElement>(null)
   const trustSectionRef = useRef<HTMLDivElement>(null)
@@ -114,24 +115,25 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === '/about-us') {
-      console.log('🎯 About-us route detected, revealing all sections and scrolling...')
+      console.log('🎯 About-us route detected, revealing all sections instantly...')
+      setIsDirectRouteLoad(true)
       setShowFirstGroup(true)
       setShowSecondGroup(true)
       setStickyCtaActivated(true)
       trackMofPageView()
+    }
+  }, [location.pathname])
 
-      setTimeout(() => {
-        const element = document.getElementById('achievements')
-        if (element) {
-          const headerOffset = window.innerWidth < 768 ? 64 : 80
-          const elementPosition = element.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+  useLayoutEffect(() => {
+    if (location.pathname === '/about-us' && achievementsRef.current) {
+      const headerOffset = window.innerWidth < 768 ? 64 : 80
+      const elementPosition = achievementsRef.current.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
-          window.scrollTo({
-            top: offsetPosition
-          })
-        }
-      }, 100)
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'auto'
+      })
     }
   }, [location.pathname])
 
@@ -181,7 +183,7 @@ function App() {
       <main className={showForm ? 'hidden' : ''}>
         <HeroSection onLearnMore={handleLearnMore} />
 
-        <div className={`transition-all duration-200 ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`${isDirectRouteLoad ? '' : 'transition-all duration-200'} ${showFirstGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <PainPointSection ref={painPointRef} />
           <AuthoritySection />
           <div ref={bridgeSectionRef}>
@@ -189,7 +191,7 @@ function App() {
           </div>
         </div>
 
-        <div className={`transition-all duration-200 ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+        <div className={`${isDirectRouteLoad ? '' : 'transition-all duration-200'} ${showSecondGroup ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
           <AchievementsSection ref={achievementsRef} />
           <div ref={whoWeAreRef}>
             <WhoWeAreSection />
