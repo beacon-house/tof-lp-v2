@@ -17,14 +17,15 @@ import { initializeMetaPixel, trackPageView, trackUnderstandApproachCTA, trackMo
 
 function App() {
   const location = useLocation()
-  const [showFirstGroup, setShowFirstGroup] = useState(false)
-  const [showSecondGroup, setShowSecondGroup] = useState(false)
+  const isAboutUsRoute = location.pathname === '/about-us'
+  const [showFirstGroup, setShowFirstGroup] = useState(isAboutUsRoute)
+  const [showSecondGroup, setShowSecondGroup] = useState(isAboutUsRoute)
   const [showForm, setShowForm] = useState(false)
   const [showStickyCTA, setShowStickyCTA] = useState(false)
-  const [stickyCtaActivated, setStickyCtaActivated] = useState(false)
+  const [stickyCtaActivated, setStickyCtaActivated] = useState(isAboutUsRoute)
   const [isInProcessSection, setIsInProcessSection] = useState(false)
   const [isInTrustSection, setIsInTrustSection] = useState(false)
-  const [isDirectRouteLoad, setIsDirectRouteLoad] = useState(false)
+  const [isDirectRouteLoad] = useState(isAboutUsRoute)
   const formRef = useRef<HTMLDivElement>(null)
   const bridgeSectionRef = useRef<HTMLDivElement>(null)
   const trustSectionRef = useRef<HTMLDivElement>(null)
@@ -114,28 +115,27 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (location.pathname === '/about-us') {
-      console.log('🎯 About-us route detected, revealing all sections instantly...')
-      setIsDirectRouteLoad(true)
-      setShowFirstGroup(true)
-      setShowSecondGroup(true)
-      setStickyCtaActivated(true)
+    if (isAboutUsRoute) {
       trackMofPageView()
     }
-  }, [location.pathname])
+  }, [isAboutUsRoute])
 
   useLayoutEffect(() => {
-    if (location.pathname === '/about-us' && achievementsRef.current) {
-      const headerOffset = window.innerWidth < 768 ? 64 : 80
-      const elementPosition = achievementsRef.current.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+    if (isAboutUsRoute && achievementsRef.current) {
+      requestAnimationFrame(() => {
+        if (achievementsRef.current) {
+          const headerOffset = window.innerWidth < 768 ? 64 : 80
+          const elementPosition = achievementsRef.current.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'auto'
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'auto'
+          })
+        }
       })
     }
-  }, [location.pathname])
+  }, [isAboutUsRoute])
 
   useEffect(() => {
     const stickyObserver = new IntersectionObserver(
