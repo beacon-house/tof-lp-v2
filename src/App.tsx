@@ -124,11 +124,17 @@ function App() {
 
   useLayoutEffect(() => {
     if (isAboutUsRoute && achievementsRef.current) {
+      document.documentElement.classList.add('no-smooth-scroll')
+
       const headerOffset = window.innerWidth < 768 ? 64 : 80
       const elementPosition = achievementsRef.current.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset
       window.scrollTo(0, offsetPosition)
-      setIsPageReady(true)
+
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove('no-smooth-scroll')
+        setIsPageReady(true)
+      })
     }
   }, [isAboutUsRoute])
 

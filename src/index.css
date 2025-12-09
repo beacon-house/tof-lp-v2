@@ -17,6 +17,10 @@
     overflow-x: hidden;
   }
 
+  html.no-smooth-scroll {
+    scroll-behavior: auto;
+  }
+
   section {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
